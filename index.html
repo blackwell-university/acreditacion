@@ -380,8 +380,20 @@
                             <input type="text" name="city" required placeholder="Enter your city">
                         </div>
                         <div class="form-group">
-                            <label>State (Only USA):</label>
-                            <input type="text" name="state" placeholder="If applicable">
+                            <label>Country:</label>
+                            <select name="country" id="country" required onchange="toggleStateField()">
+                             <option value="">Select Country</option>
+                                <option value="United States">United States</option>
+                                <option value="Mexico">Mexico</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Peru">Peru</option>
+                                <option value="Brazil">Brazil</option>
+                                <option value="Spain">Spain</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                     </div>
                     
@@ -390,10 +402,12 @@
                             <label>Zip Code:</label>
                             <input type="text" name="zipCode" required placeholder="Enter zip code">
                         </div>
-                        <div class="form-group">
-                            <label>Country:</label>
-                            <input type="text" name="country" required placeholder="Enter your country">
+
+                        <div class="form-group" id="stateField" style="display: none;">
+                            <label>State (Only USA):</label>
+                            <input type="text" name="state" id="state" placeholder="If applicable">
                         </div>
+
                     </div>
                     
                     <div class="form-row">
@@ -572,6 +586,33 @@
                         </label>
                     </div>
                 </div>
+
+                <!-- Agregar esta nueva sección -->
+<div class="section">
+    <h2><i class="fas fa-award"></i> SCHOLARSHIP INFORMATION</h2>
+    
+    <div class="form-row">
+        <div class="form-group">
+            <label>Scholarship Type:</label>
+            <select name="scholarshipType" id="scholarshipType" onchange="toggleFamilyIncome()">
+                <option value="">Select Scholarship</option>
+                <option value="Elizabeth Blackwell Grant">Elizabeth Blackwell Grant</option>
+                <option value="One Academic Scholarship">One Academic Scholarship</option>
+                <option value="Celia Cruz Scholarship">Celia Cruz Scholarship</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="familyIncomeField" style="display: none;">
+            <label>Family Income:<span class="required">*</span></label>
+            <select name="familyIncome" id="familyIncome">
+                <option value="">Select Income Range</option>
+                <option value="Annual gross income less than $20,000.00">Annual gross income less than $20,000.00</option>
+                <option value="Annual income $20,001.00 - $40,000.00">Annual income $20,001.00 - $40,000.00</option>
+                <option value="Annual income $40,001.00 - $60,000.00">Annual income $40,001.00 - $60,000.00</option>
+            </select>
+        </div>
+    </div>
+</div>
                 
                 <!-- Signature Section -->
                 <div class="section">
@@ -607,7 +648,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3_09l77g0NZbHaxG5YZzMxZuQdcvgtjfTomssYRwfU3qFbb-9OKKhs2bYioeP88IK/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3gLblDE06X6zsBMinUNAGfh0XT0-vLTco10Y0exxVjqo9hMHiThmQmQqa8Ml2BgST/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -722,42 +763,74 @@
 
         // Update programs based on program level
         function updatePrograms() {
-            const programLevel = document.getElementById('programLevel').value;
-            const programSelect = document.getElementById('program');
-            
-            // Clear current options
-            programSelect.innerHTML = '<option value="">Select Program</option>';
-            
-            if (programLevel === 'Undergraduate') {
-                const programs = [
-                    'Bachelor of Science in Computer Science',
-                    'Bachelor of Arts in Business Administration',
-                    'Bachelor of Arts in Psychology',
-                    'Bachelor of Science in Engineering'
-                ];
-                
-                programs.forEach(program => {
-                    const option = document.createElement('option');
-                    option.value = program;
-                    option.textContent = program;
-                    programSelect.appendChild(option);
-                });
-            } else if (programLevel === 'Graduate') {
-                const programs = [
-                    'Master of Business Administration (MBA)',
-                    'Master of Science in Computer Science',
-                    'Master of Arts in Education',
-                    'Doctor of Philosophy (PhD)'
-                ];
-                
-                programs.forEach(program => {
-                    const option = document.createElement('option');
-                    option.value = program;
-                    option.textContent = program;
-                    programSelect.appendChild(option);
-                });
-            }
-        }
+    const programLevel = document.getElementById('programLevel').value;
+    const programSelect = document.getElementById('program');
+    
+    programSelect.innerHTML = '<option value="">Select Program</option>';
+    
+    if (programLevel === 'Graduate') {
+        const programs = [
+            'Doctorate in Business Administration',
+            'Master of Business Administration',
+            'Master of Science in Hospitality Management',
+            'Master of Science in Healthcare Management',
+            'Master of Science in Project Management',
+            'Master of Science in Artificial Intelligence',
+            'Master of Science in Cybersecurity',
+            'Master of Science in Renewable Energy and Sustainability Systems',
+            'Master of Science in Criminal Justice'
+        ];
+        programs.forEach(program => {
+            const option = document.createElement('option');
+            option.value = program;
+            option.textContent = program;
+            programSelect.appendChild(option);
+        });
+    } else if (programLevel === 'Undergraduate') {
+        const programs = [
+            'Bachelor of Arts in Accounting',
+            'Bachelor of Science in Business Administration'
+        ];
+        programs.forEach(program => {
+            const option = document.createElement('option');
+            option.value = program;
+            option.textContent = program;
+            programSelect.appendChild(option);
+        });
+    }
+}
+
+// Función para mostrar/ocultar campo de estado
+function toggleStateField() {
+    const country = document.getElementById('country').value;
+    const stateField = document.getElementById('stateField');
+    const stateInput = document.getElementById('state');
+    
+    if (country === 'United States') {
+        stateField.style.display = 'block';
+        stateInput.required = true;
+    } else {
+        stateField.style.display = 'none';
+        stateInput.required = false;
+        stateInput.value = '';
+    }
+}
+
+// Función para mostrar/ocultar campo de ingreso familiar
+function toggleFamilyIncome() {
+    const scholarshipType = document.getElementById('scholarshipType').value;
+    const familyIncomeField = document.getElementById('familyIncomeField');
+    const familyIncomeSelect = document.getElementById('familyIncome');
+    
+    if (scholarshipType === 'Elizabeth Blackwell Grant') {
+        familyIncomeField.style.display = 'block';
+        familyIncomeSelect.required = true;
+    } else {
+        familyIncomeField.style.display = 'none';
+        familyIncomeSelect.required = false;
+        familyIncomeSelect.value = '';
+    }
+}
 
         // Signature pad initialization
         const canvas = document.getElementById('signature-pad');
