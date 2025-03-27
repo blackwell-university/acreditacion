@@ -344,6 +344,11 @@
                 padding: 15px;
             }
         }
+
+        .requirements label {
+    transition: all 0.3s ease;
+    display: none; /* Ocultos por defecto */
+}
     </style>
 </head>
 <body>
@@ -491,6 +496,7 @@
                             <label>Select the program level:</label>
                             <select name="programLevel" id="programLevel" required onchange="updatePrograms()">
                                 <option value="">Select Level</option>
+                                <option value="Graduate +">Graduate +</option>
                                 <option value="Graduate">Graduate</option>
                                 <option value="Undergraduate">Undergraduate</option>
                             </select>
@@ -537,7 +543,7 @@
                     <p class="section-note">Please confirm all documents you are submitting with your application</p>
                     
                     <div class="requirements">
-                        <label>
+                        <label id="req1">
                             <input type="checkbox" name="requirementPhotoId">
                             <div>
                                 <strong>Official Valid Government ID</strong>
@@ -545,7 +551,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req2">
                             <input type="checkbox" name="requirementHighSchool">
                             <div>
                                 <strong>High School Diploma</strong>
@@ -553,7 +559,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req3">
                             <input type="checkbox" name="requirementTranscript">
                             <div>
                                 <strong>Associate Degree Transcript</strong>
@@ -561,7 +567,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req4">
                             <input type="checkbox" name="requirementAssociateDegree">
                             <div>
                                 <strong>Associate Degree Diploma</strong>
@@ -569,7 +575,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req5">
                             <input type="checkbox" name="requirementForeignTranslation">
                             <div>
                                 <strong>Foreign Degree Translation</strong>
@@ -577,7 +583,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req6">
                             <input type="checkbox" name="requirementBachelorTranscript">
                             <div>
                                 <strong>Bachelor's Degree Transcript</strong>
@@ -585,15 +591,15 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req7">
                             <input type="checkbox" name="requirementBachelorDiploma">
                             <div>
                                 <strong>Bachelor's Degree Diploma</strong>
                                 <p>Copy of the Bachelor's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition</p>
                             </div>
                         </label>
-
-                        <label>
+                    
+                        <label id="req8">
                             <input type="checkbox" name="requirementMasterDiploma">
                             <div>
                                 <strong>Master's Degree Diploma</strong>
@@ -601,7 +607,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req9">
                             <input type="checkbox" name="requirementMasterTranscript">
                             <div>
                                 <strong>Master's Degree Transcript</strong>
@@ -609,7 +615,7 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req10">
                             <input type="checkbox" name="requirementBusinessExperience">
                             <div>
                                 <strong>Business Experience</strong>
@@ -617,14 +623,13 @@
                             </div>
                         </label>
                         
-                        <label>
+                        <label id="req11">
                             <input type="checkbox" name="requirementLanguageCompetency">
                             <div>
                                 <strong>Language Competency</strong>
                                 <p>Evidence of competency in the language of instruction that you have selected.</p>
                             </div>
                         </label>
-                        
                     </div>
                 </div>
 
@@ -689,7 +694,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJXOOM3EN2JKKGe-c7JkssU6oqb5Hm089TN05ipM0XEiBGH5z6LcI56RYBaxfhx07e/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRMcKJLSKheV8vU-wDcJFN0CS2ufqOs_z_PLg_NuvKZ4zdGQMdhGdNdBtvWgsU4RF5/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -738,7 +743,7 @@
                         title: '¡Solicitud Enviada!',
                         html: `
                             Tu solicitud ha sido procesada correctamente.<br><br>
-                            <a href="${result.documentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento</a>
+                            <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento</a>
                         `,
                         icon: 'success',
                         showConfirmButton: false,
@@ -803,7 +808,7 @@
         }
 
         // Update programs based on program level
-function updatePrograms() {
+        function updatePrograms() {
     const programLevel = document.getElementById('programLevel').value;
     const programSelect = document.getElementById('program');
     const semesterSelect = document.getElementById('semester');
@@ -812,10 +817,50 @@ function updatePrograms() {
     programSelect.innerHTML = '<option value="">Select Program</option>';
     semesterSelect.innerHTML = '<option value="">Select Semester</option>';
     
-    if (programLevel === 'Graduate') {
+    // Ocultar todos los requisitos primero
+    for(let i = 1; i <= 11; i++) {
+        document.getElementById(`req${i}`).style.display = 'none';
+    }
+    
+    if (programLevel === 'Graduate +') {
+        // Mostrar requisitos específicos para Graduate +
+        const showReqs = [1, 8, 9, 10, 11];
+        showReqs.forEach(num => {
+            document.getElementById(`req${num}`).style.display = 'flex';
+        });
+        
+        // Actualizar programas Graduate +
+        const programs = [
+            'Doctorate in Business Administration'
+        ];
+        programs.forEach(program => {
+            const option = document.createElement('option');
+            option.value = program;
+            option.textContent = program;
+            programSelect.appendChild(option);
+        });
+
+        // Actualizar semestres Graduate +
+        const semesters = [
+            'June 30, 2026',
+            'July 4, 2026'
+        ];
+        semesters.forEach(semester => {
+            const option = document.createElement('option');
+            option.value = semester;
+            option.textContent = semester;
+            semesterSelect.appendChild(option);
+        });
+    } 
+    else if (programLevel === 'Graduate') {
+        // Mostrar requisitos específicos para Graduate
+        const showReqs = [1, 6, 7, 11];
+        showReqs.forEach(num => {
+            document.getElementById(`req${num}`).style.display = 'flex';
+        });
+        
         // Actualizar programas Graduate
         const programs = [
-            'Doctorate in Business Administration',
             'Master of Business Administration',
             'Master of Science in Hospitality Management',
             'Master of Science in Healthcare Management',
@@ -843,7 +888,14 @@ function updatePrograms() {
             option.textContent = semester;
             semesterSelect.appendChild(option);
         });
-    } else if (programLevel === 'Undergraduate') {
+    } 
+    else if (programLevel === 'Undergraduate') {
+        // Mostrar requisitos específicos para Undergraduate
+        const showReqs = [1, 2, 3, 4, 5, 11];
+        showReqs.forEach(num => {
+            document.getElementById(`req${num}`).style.display = 'flex';
+        });
+        
         // Actualizar programas Undergraduate
         const programs = [
             'Bachelor of Arts in Accounting',
