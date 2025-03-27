@@ -520,6 +520,14 @@
                                 <option value="Hybrid">Hybrid</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>Select the semester:</label>
+                            <select name="semester" id="semester" required>
+                                <option value="">Select Semester</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
                 
@@ -584,35 +592,68 @@
                                 <p>Copy of the Bachelor's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition</p>
                             </div>
                         </label>
+
+                        <label>
+                            <input type="checkbox" name="requirementMasterDiploma">
+                            <div>
+                                <strong>Master's Degree Diploma</strong>
+                                <p>Copy of the Master's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition.</p>
+                            </div>
+                        </label>
+                        
+                        <label>
+                            <input type="checkbox" name="requirementMasterTranscript">
+                            <div>
+                                <strong>Master's Degree Transcript</strong>
+                                <p>Official transcript of the Master's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition.</p>
+                            </div>
+                        </label>
+                        
+                        <label>
+                            <input type="checkbox" name="requirementBusinessExperience">
+                            <div>
+                                <strong>Business Experience</strong>
+                                <p>Documentation that certifies 4 years of verifiable business experience</p>
+                            </div>
+                        </label>
+                        
+                        <label>
+                            <input type="checkbox" name="requirementLanguageCompetency">
+                            <div>
+                                <strong>Language Competency</strong>
+                                <p>Evidence of competency in the language of instruction that you have selected.</p>
+                            </div>
+                        </label>
+                        
                     </div>
                 </div>
 
-                <!-- Agregar esta nueva sección -->
-<div class="section">
-    <h2><i class="fas fa-award"></i> SCHOLARSHIP INFORMATION</h2>
-    
-    <div class="form-row">
-        <div class="form-group">
-            <label>Scholarship Type:</label>
-            <select name="scholarshipType" id="scholarshipType" onchange="toggleFamilyIncome()">
-                <option value="">Select Scholarship</option>
-                <option value="Elizabeth Blackwell Grant">Elizabeth Blackwell Grant</option>
-                <option value="One Academic Scholarship">One Academic Scholarship</option>
-                <option value="Celia Cruz Scholarship">Celia Cruz Scholarship</option>
-            </select>
-        </div>
-        
-        <div class="form-group" id="familyIncomeField" style="display: none;">
-            <label>Family Income:<span class="required">*</span></label>
-            <select name="familyIncome" id="familyIncome">
-                <option value="">Select Income Range</option>
-                <option value="Annual gross income less than $20,000.00">Annual gross income less than $20,000.00</option>
-                <option value="Annual income $20,001.00 - $40,000.00">Annual income $20,001.00 - $40,000.00</option>
-                <option value="Annual income $40,001.00 - $60,000.00">Annual income $40,001.00 - $60,000.00</option>
-            </select>
-        </div>
-    </div>
-</div>
+                <!-- SCHOLARSHIP INFORMATION -->
+                <div class="section">
+                    <h2><i class="fas fa-award"></i> SCHOLARSHIP INFORMATION</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Scholarship Type:</label>
+                            <select name="scholarshipType" id="scholarshipType" onchange="toggleFamilyIncome()">
+                                <option value="">Select Scholarship</option>
+                                <option value="Elizabeth Blackwell Grant">Elizabeth Blackwell Grant</option>
+                                <option value="One Academic Scholarship">One Academic Scholarship</option>
+                                <option value="Celia Cruz Scholarship">Celia Cruz Scholarship</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="familyIncomeField" style="display: none;">
+                            <label>Family Income:<span class="required">*</span></label>
+                            <select name="familyIncome" id="familyIncome">
+                                <option value="">Select Income Range</option>
+                                <option value="Annual gross income less than $ 20,000.00 in the year prior to the application">Annual gross income less than $ 20,000.00 in the year prior to the application</option>
+                                <option value="Annual income $ 20,001.00 and less than $ 40,000.00 in the year prior to the application">Annual income $ 20,001.00 and less than $ 40,000.00 in the year prior to the application</option>
+                                <option value="Annual income $ 40,001.00 and less than $ 60,000.00 in the year prior to the application">Annual income $ 40,001.00 and less than $ 60,000.00 in the year prior to the application</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Signature Section -->
                 <div class="section">
@@ -648,7 +689,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3gLblDE06X6zsBMinUNAGfh0XT0-vLTco10Y0exxVjqo9hMHiThmQmQqa8Ml2BgST/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqGebiqSqUgRc35CmQ5NXriEG1jPgGYOpRQaimOv6H0_0WZ2EEQG-zNYB6RFYYrJ4p/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -762,13 +803,17 @@
         }
 
         // Update programs based on program level
-        function updatePrograms() {
+function updatePrograms() {
     const programLevel = document.getElementById('programLevel').value;
     const programSelect = document.getElementById('program');
+    const semesterSelect = document.getElementById('semester');
     
+    // Limpiar opciones actuales
     programSelect.innerHTML = '<option value="">Select Program</option>';
+    semesterSelect.innerHTML = '<option value="">Select Semester</option>';
     
     if (programLevel === 'Graduate') {
+        // Actualizar programas Graduate
         const programs = [
             'Doctorate in Business Administration',
             'Master of Business Administration',
@@ -786,7 +831,20 @@
             option.textContent = program;
             programSelect.appendChild(option);
         });
+
+        // Actualizar semestres Graduate
+        const semesters = [
+            'March 31, 2025',
+            'March 13, 2025'
+        ];
+        semesters.forEach(semester => {
+            const option = document.createElement('option');
+            option.value = semester;
+            option.textContent = semester;
+            semesterSelect.appendChild(option);
+        });
     } else if (programLevel === 'Undergraduate') {
+        // Actualizar programas Undergraduate
         const programs = [
             'Bachelor of Arts in Accounting',
             'Bachelor of Science in Business Administration'
@@ -797,40 +855,52 @@
             option.textContent = program;
             programSelect.appendChild(option);
         });
+
+        // Actualizar semestres Undergraduate
+        const semesters = [
+            'April 31, 2025',
+            'April 25, 2025'
+        ];
+        semesters.forEach(semester => {
+            const option = document.createElement('option');
+            option.value = semester;
+            option.textContent = semester;
+            semesterSelect.appendChild(option);
+        });
     }
 }
 
-// Función para mostrar/ocultar campo de estado
-function toggleStateField() {
-    const country = document.getElementById('country').value;
-    const stateField = document.getElementById('stateField');
-    const stateInput = document.getElementById('state');
-    
-    if (country === 'United States') {
-        stateField.style.display = 'block';
-        stateInput.required = true;
-    } else {
-        stateField.style.display = 'none';
-        stateInput.required = false;
-        stateInput.value = '';
-    }
-}
+        // Función para mostrar/ocultar campo de estado
+        function toggleStateField() {
+            const country = document.getElementById('country').value;
+            const stateField = document.getElementById('stateField');
+            const stateInput = document.getElementById('state');
+            
+            if (country === 'United States') {
+                stateField.style.display = 'block';
+                stateInput.required = true;
+            } else {
+                stateField.style.display = 'none';
+                stateInput.required = false;
+                stateInput.value = '';
+            }
+        }
 
-// Función para mostrar/ocultar campo de ingreso familiar
-function toggleFamilyIncome() {
-    const scholarshipType = document.getElementById('scholarshipType').value;
-    const familyIncomeField = document.getElementById('familyIncomeField');
-    const familyIncomeSelect = document.getElementById('familyIncome');
-    
-    if (scholarshipType === 'Elizabeth Blackwell Grant') {
-        familyIncomeField.style.display = 'block';
-        familyIncomeSelect.required = true;
-    } else {
-        familyIncomeField.style.display = 'none';
-        familyIncomeSelect.required = false;
-        familyIncomeSelect.value = '';
-    }
-}
+        // Función para mostrar/ocultar campo de ingreso familiar
+        function toggleFamilyIncome() {
+            const scholarshipType = document.getElementById('scholarshipType').value;
+            const familyIncomeField = document.getElementById('familyIncomeField');
+            const familyIncomeSelect = document.getElementById('familyIncome');
+            
+            if (scholarshipType === 'Elizabeth Blackwell Grant') {
+                familyIncomeField.style.display = 'block';
+                familyIncomeSelect.required = true;
+            } else {
+                familyIncomeField.style.display = 'none';
+                familyIncomeSelect.required = false;
+                familyIncomeSelect.value = '';
+            }
+        }
 
         // Signature pad initialization
         const canvas = document.getElementById('signature-pad');
