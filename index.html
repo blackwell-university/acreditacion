@@ -694,7 +694,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRMcKJLSKheV8vU-wDcJFN0CS2ufqOs_z_PLg_NuvKZ4zdGQMdhGdNdBtvWgsU4RF5/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ0KzPYZPJAW41nIaZYn1kSqOnk5WFFSTZ4tmt-_w1quQwrdFCmi7fLV4ff0G8qgyv/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -743,8 +743,13 @@
                         title: '¡Solicitud Enviada!',
                         html: `
                             Tu solicitud ha sido procesada correctamente.<br><br>
-                            <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento</a>
-                        `,
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Solicitud</a>
+                <a href="${result.acceptanceUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Carta de Aceptación</a>
+                ${result.scholarshipUrl ? 
+                    `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento de Beca</a>` 
+                    : ''}
+            </div>                        `,
                         icon: 'success',
                         showConfirmButton: false,
                         showCloseButton: true
