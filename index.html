@@ -694,7 +694,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ0KzPYZPJAW41nIaZYn1kSqOnk5WFFSTZ4tmt-_w1quQwrdFCmi7fLV4ff0G8qgyv/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHh9P-GhI882xwRkaBbm82GA8OhMoh_LDFaQKakW9eqJxe2vzhbZ-aYiEQ-nAtVgDk/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -749,7 +749,8 @@
                 ${result.scholarshipUrl ? 
                     `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento de Beca</a>` 
                     : ''}
-            </div>                        `,
+                <a href="${result.enrollmentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Enrollment Agreement</a>
+            </div>`,
                         icon: 'success',
                         showConfirmButton: false,
                         showCloseButton: true
