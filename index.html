@@ -694,7 +694,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1wbTlwvn1v1B9SzztOUqMss9caAFbFLlGyqPIwDHl0IBDYaNY0ZGRlijyLcbCyKVJ/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzB2dja-SuEXBlPaR9e8_o8CZBMtjzXe4-2PnLIeA3aBRylcZgoqlQ4TxDe-LQfj4pF/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -743,14 +743,15 @@
                         title: '¡Solicitud Enviada!',
                         html: `
                             Tu solicitud ha sido procesada correctamente.<br><br>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Solicitud</a>
-                <a href="${result.acceptanceUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Carta de Aceptación</a>
-                ${result.scholarshipUrl ? 
-                    `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento de Beca</a>` 
-                    : ''}
-                <a href="${result.enrollmentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Enrollment Agreement</a>
-            </div>`,
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Solicitud</a>
+                                <a href="${result.acceptanceUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Carta de Aceptación</a>
+                                ${result.scholarshipUrl ? 
+                                    `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Documento de Beca</a>` 
+                                    : ''}
+                                <a href="${result.enrollmentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Enrollment Agreement</a>
+                                <a href="${result.fifthDocumentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; margin: 5px;">Ver Quinto Documento</a>
+                            </div>`,
                         icon: 'success',
                         showConfirmButton: false,
                         showCloseButton: true
