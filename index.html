@@ -377,6 +377,46 @@
     max-width: 400px;
     cursor: crosshair;
 }
+
+
+.ferpa-requirements label {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.ferpa-requirements label:hover {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ferpa-requirements input[type="checkbox"] {
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.ferpa-requirements div {
+    flex: 1;
+}
+
+.ferpa-requirements strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.ferpa-requirements p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
     </style>
 </head>
 <body>
@@ -696,6 +736,100 @@
                         </div>
                     </div>
                 </div>
+
+<!-- FERPA Waiver Section -->
+<div class="section">
+    <h2><i class="fas fa-user-shield"></i> FERPA WAIVER FORM</h2>
+    <p class="section-note">This form is to be used by the student to grant access to their records to other persons or entities, such as a parent, spouse, or employer. When completing this form, please print all items clearly to allow for correct processing.</p>
+
+    <!-- Initial Consent -->
+    <div class="form-group">
+        <label class="consent-label">
+            <input type="checkbox" name="ferpaConsent" id="ferpaConsent" onchange="toggleFerpaContent(this.checked)">
+            <span>I hereby authorize Blackwell Global University to release my educational records to the persons listed below. I understand this authorization will remain in effect until I submit a written request to cancel it.</span>
+        </label>
+    </div>
+
+    <!-- FERPA Content (hidden by default) -->
+    <div id="ferpaContent" style="display: none;">
+        <!-- Authorized Persons -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Authorized person's full name:</label>
+                <input type="text" name="ferpaAuthorizedPerson1" placeholder="Enter full name">
+            </div>
+            <div class="form-group">
+                <label>Relationship:</label>
+                <input type="text" name="ferpaRelationship1" placeholder="Enter relationship">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Authorized person's full name:</label>
+                <input type="text" name="ferpaAuthorizedPerson2" placeholder="Enter full name">
+            </div>
+            <div class="form-group">
+                <label>Relationship:</label>
+                <input type="text" name="ferpaRelationship2" placeholder="Enter relationship">
+            </div>
+        </div>
+
+        <!-- Types of Information -->
+        <div class="requirements ferpa-requirements">
+            <label>
+                <input type="checkbox" name="ferpaAllRecords" onchange="toggleAllFerpaRecords(this.checked)">
+                <div>
+                    <strong>All Records</strong>
+                    <p>Release all educational records</p>
+                </div>
+            </label>
+
+            <label>
+                <input type="checkbox" name="ferpaAccounting" class="ferpa-specific">
+                <div>
+                    <strong>Accounting</strong>
+                    <p>Includes tuition and fee balances, financial holds, mailing and billing address, payment plans, accounting statements and collections and debt information</p>
+                </div>
+            </label>
+
+            <label>
+                <input type="checkbox" name="ferpaAdmission" class="ferpa-specific">
+                <div>
+                    <strong>Admission</strong>
+                    <p>Includes dates of application, programs selected, documents received, documents pending, dates of admission, admission status and conditions of admission</p>
+                </div>
+            </label>
+
+            <label>
+                <input type="checkbox" name="ferpaRegistration" class="ferpa-specific">
+                <div>
+                    <strong>Registration</strong>
+                    <p>Includes current enrollment, dates of enrollment activity, enrollment status, residency status, semesters attended and mailing address information</p>
+                </div>
+            </label>
+
+            <label>
+                <input type="checkbox" name="ferpaAcademicRecords" class="ferpa-specific">
+                <div>
+                    <strong>Academic Records</strong>
+                    <p>Includes courses taken, grades received, GPA, academic progress, honors, transfer credit awarded and degree(s) awarded</p>
+                </div>
+            </label>
+
+            <label>
+                <input type="checkbox" name="ferpaFinancialAid" class="ferpa-specific">
+                <div>
+                    <strong>Financial Aid</strong>
+                    <p>Includes all general financial aid information</p>
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+
+
+                
                 
                 <!-- Signature Section -->
                 <div class="section">
@@ -733,7 +867,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8v_JaSXri4vdxvdYo5QiGV7PbBgGvGyuTLz4q3c6KlGVnOuCEaV-Ysppsn1hK3oN6/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwurmSN8XsFe0LRv-ckoFGSbCyRbUPED22JUDwdMmGJeZJQkqDVcySDGaRw7945DkUx/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -794,6 +928,7 @@ formData.signatureParent = canvasParent.toDataURL();
         <a href="${result.fifthDocumentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Compromiso</a>
         <a href="${result.grantApplicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Formulario de Solicitud de Beca</a>
         <a href="${result.updateFinancialUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Actualización Financiera</a>
+        <a href="${result.ferpaUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver FERPA Waiver</a>
     </div>`,
                         icon: 'success',
                         showConfirmButton: false,
@@ -1141,6 +1276,39 @@ function clearSignatureParent() {
             
             return true;
         }
+
+
+// Función para mostrar/ocultar el contenido FERPA
+function toggleFerpaContent(checked) {
+    const ferpaContent = document.getElementById('ferpaContent');
+    ferpaContent.style.display = checked ? 'block' : 'none';
+    
+    // Si se desmarca el consentimiento, limpiar todos los campos
+    if (!checked) {
+        clearFerpaFields();
+    }
+}
+
+// Función para limpiar todos los campos FERPA
+function clearFerpaFields() {
+    document.querySelectorAll('[name^="ferpaAuthorizedPerson"], [name^="ferpaRelationship"]')
+        .forEach(input => input.value = '');
+    document.querySelectorAll('.ferpa-requirements input[type="checkbox"]')
+        .forEach(checkbox => checkbox.checked = false);
+}
+
+// Función para manejar el checkbox "All Records"
+function toggleAllFerpaRecords(checked) {
+    const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
+    specificCheckboxes.forEach(checkbox => {
+        checkbox.checked = checked;
+        checkbox.disabled = checked;
+    });
+}
+
+
+
+
     </script>
     
     <!-- Waves Animation Background -->
