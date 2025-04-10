@@ -237,26 +237,44 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .requirements label {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 8px;
-            background-color: var(--light-bg);
-            transition: all 0.3s ease;
-        }
+.requirements label {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 15px;  /* Más padding como FERPA */
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
 
-        .requirements label:hover {
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+.requirements label:hover {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .requirements input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 5px;
-            transform: scale(1.2);
-        }
+.requirements input[type="checkbox"] {
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.requirements div {
+    flex: 1;
+}
+
+.requirements strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.requirements p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
 
         #signature-pad {
             border: 2px solid #e0e0e0;
@@ -867,7 +885,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwurmSN8XsFe0LRv-ckoFGSbCyRbUPED22JUDwdMmGJeZJQkqDVcySDGaRw7945DkUx/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhgktWi9rIWjsEgtQzyA9H_WjR4nMb9u6GMDWuJYEeyRLrrzZcgul0SqEa5YspmONJ/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -917,18 +935,18 @@ formData.signatureParent = canvasParent.toDataURL();
                     Swal.fire({
                         title: '¡Solicitud Enviada!',
                         html: `
-    Tu solicitud ha sido procesada correctamente.<br><br>
+    Your request has been processed successfully.<br><br>
     <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Formulario de Solicitud</a>
-        <a href="${result.acceptanceUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Aceptación</a>
+        <a href="${result.applicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Application Form</a>
+        <a href="${result.acceptanceUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Acceptance Letter</a>
         ${result.scholarshipUrl ? 
-            `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Beca</a>` 
+            `<a href="${result.scholarshipUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Grant Scholarship Letter</a>` 
             : ''}
-        <a href="${result.enrollmentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Acuerdo de Inscripción</a>
-        <a href="${result.fifthDocumentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Compromiso</a>
-        <a href="${result.grantApplicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Formulario de Solicitud de Beca</a>
-        <a href="${result.updateFinancialUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver Carta de Actualización Financiera</a>
-        <a href="${result.ferpaUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Ver FERPA Waiver</a>
+        <a href="${result.enrollmentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Enrollment Agreement</a>
+        <a href="${result.fifthDocumentUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Commitment Letter</a>
+        <a href="${result.grantApplicationUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Grant Application Form</a>
+        <a href="${result.updateFinancialUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">Financial Update Letter</a>
+        <a href="${result.ferpaUrl}" target="_blank" class="swal2-confirm swal2-styled" style="text-decoration: none; color: #fff !important; margin: 5px;">FERPA Waiver</a>
     </div>`,
                         icon: 'success',
                         showConfirmButton: false,
@@ -1297,14 +1315,33 @@ function clearFerpaFields() {
         .forEach(checkbox => checkbox.checked = false);
 }
 
-// Función para manejar el checkbox "All Records"
+// Función para cuando se marca/desmarca "All Records"
 function toggleAllFerpaRecords(checked) {
     const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
     specificCheckboxes.forEach(checkbox => {
         checkbox.checked = checked;
-        checkbox.disabled = checked;
     });
 }
+
+// Función para verificar si todos los específicos están marcados
+function checkAllSpecifics() {
+    const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
+    const allChecked = Array.from(specificCheckboxes).every(checkbox => checkbox.checked);
+    document.querySelector('[name="ferpaAllRecords"]').checked = allChecked;
+}
+
+// Agregar event listeners a los checkboxes específicos
+document.querySelectorAll('.ferpa-specific').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (!this.checked) {
+            // Si se desmarca uno, desmarcar "All"
+            document.querySelector('[name="ferpaAllRecords"]').checked = false;
+        } else {
+            // Verificar si todos están marcados
+            checkAllSpecifics();
+        }
+    });
+});
 
 
 
