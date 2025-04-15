@@ -829,7 +829,7 @@ select:disabled {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // URL de tu Google Apps Script desplegado
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhgktWi9rIWjsEgtQzyA9H_WjR4nMb9u6GMDWuJYEeyRLrrzZcgul0SqEa5YspmONJ/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby80xuNNHdnqQMf5Vy6bMZZkydGh6V7K0P66Ni1MEP-2OHeJoCviOxtCS1-EWZGvwO1/exec';
 
         async function submitForm(event) {
             event.preventDefault();
@@ -1032,9 +1032,7 @@ formData.signatureParent = canvasParent.toDataURL();
         // Actualizar semestres Graduate +
         const semesters = [
             'April 28, 2025',
-            'May 26, 2025',
-            'June 23, 2025' ,
-            'July 21, 2025'
+            'June 23, 2025'
 
         ];
         semesters.forEach(semester => {
@@ -1093,7 +1091,9 @@ formData.signatureParent = canvasParent.toDataURL();
         // Actualizar programas Undergraduate
         const programs = [
             'Bachelor of Arts in Accounting',
-            'Bachelor of Science in Business Administration'
+            'Bachelor of Science in Business Administration',
+            'Upgrade of Arts in Accounting',
+            'Upgrade of Science in Business Administration'
         ];
         programs.forEach(program => {
             const option = document.createElement('option');
