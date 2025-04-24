@@ -1,384 +1,393 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admission Application Form</title>
+    <title>Admission Application Form - Windows 11 Style</title>
     <!-- SweetAlert2 -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome (opcional) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts (Fallback) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
-:root {
-    --primary-color: #0078D4;
-    --secondary-color: #106EBE;
-    --accent-color: #2B88D8;
-    --background-color: #F5F5F5;
-    --text-color: #323130;
-    --border-color: #EDEBE9;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
-    --gradient: linear-gradient(135deg, #0078D4, #106EBE);
-}
+        :root {
+            --accent-color: #0078D4; /* Windows 11 Blue */
+            --accent-color-hover: #005A9E;
+            --accent-color-light: #CCE4F6;
+            --background-color: #F9F9F9; /* Slightly off-white */
+            --surface-color: #FFFFFF;
+            --text-color-primary: #1D1D1D; /* Darker Gray */
+            --text-color-secondary: #605E5C; /* Medium Gray */
+            --border-color-light: #E1E1E1; /* Light Gray Border */
+            --border-color-focus: var(--accent-color);
+            --shadow-depth-1: 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-depth-2: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-depth-3: 0 8px 16px rgba(0, 0, 0, 0.12);
+            --font-family: 'Segoe UI Variable', 'Segoe UI', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            --border-radius-sm: 4px;
+            --border-radius-md: 6px;
+            --border-radius-lg: 8px;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.4;
-    min-height: 100vh;
-}
+        body {
+            font-family: var(--font-family);
+            background: var(--background-color);
+            color: var(--text-color-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
 
-.container {
-    max-width: 750px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-}
+        .container {
+            max-width: 800px; /* Slightly wider */
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-.form-card {
-    background: white;
-    border-radius: 4px;
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
+        .form-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-depth-2);
+            overflow: hidden;
+            border: 1px solid var(--border-color-light);
+        }
 
-.form-card:hover {
-    transform: translateY(-2px);
-}
+        .form-header {
+            background: linear-gradient(135deg, #0078D4, #005A9E); /* Updated Gradient */
+            padding: 1.8rem 2rem; /* Increased padding */
+            text-align: center;
+        }
 
-.form-header {
-    background: var(--gradient);
-    padding: 1.5rem;
-    text-align: center;
-}
+        .form-header h1 {
+            color: white;
+            font-size: 1.9rem;
+            font-weight: 600; /* Semibold */
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.2px;
+        }
 
-.form-header h1 {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
-}
+        .form-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
 
-.form-header p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-}
+        .section {
+            padding: 1.5rem 2rem; /* Increased padding */
+            border-bottom: 1px solid var(--border-color-light);
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
 
-.section {
-    background: white;
-    margin: 0.8rem;
-    padding: 1.2rem;
-    border-radius: 4px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.2s ease;
-    border: 1px solid var(--border-color);
-}
+        .section h2 {
+            color: var(--accent-color);
+            font-size: 1.35rem; /* Slightly larger */
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600; /* Semibold */
+        }
 
-.section:hover {
-    box-shadow: var(--shadow-md);
-}
+        .section h2 i {
+            color: var(--accent-color);
+            font-size: 1.25rem;
+        }
 
-.section h2 {
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 500;
-}
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem; /* Increased gap */
+            margin-bottom: 1.2rem;
+        }
 
-.section h2 i {
-    color: var(--accent-color);
-    font-size: 1.2rem;
-}
+        .form-group {
+            margin-bottom: 0.8rem; /* Keep this moderate */
+        }
 
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
+        label {
+            display: block;
+            margin-bottom: 0.5rem; /* Slightly more space */
+            font-weight: 500; /* Medium */
+            color: var(--text-color-secondary);
+            font-size: 0.9rem;
+        }
 
-.form-group {
-    margin-bottom: 0.8rem;
-}
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem; /* Increased padding */
+            border: 1px solid var(--border-color-light);
+            border-radius: var(--border-radius-md); /* Consistent rounding */
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: var(--surface-color);
+            color: var(--text-color-primary);
+            font-family: var(--font-family); /* Ensure font consistency */
+        }
 
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 0.9rem;
-}
+        input:focus,
+        select:focus {
+            border-color: var(--border-color-focus);
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3); /* Focus ring */
+            outline: none;
+        }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-select {
-    width: 100%;
-    padding: 0.7rem 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    background: white;
-    color: var(--text-color);
-}
+        input::placeholder {
+            color: #A19F9D;
+        }
 
-input:focus,
-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.1);
-    outline: none;
-}
+        /* Checkbox Styling (More Windows 11 like) */
+        .requirements label,
+        .ferpa-requirements label,
+        .consent-label {
+            display: flex;
+            align-items: flex-start; /* Align checkbox with top of text */
+            padding: 0.9rem 1rem;
+            background: #F9F9F9; /* Slightly different background */
+            border-radius: var(--border-radius-md);
+            margin-bottom: 0.7rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color-light);
+        }
 
-input::placeholder {
-    color: #A19F9D;
-}
+        .requirements label:hover,
+        .ferpa-requirements label:hover,
+        .consent-label:hover {
+            background: #F0F0F0; /* Subtle hover */
+            border-color: #C1C1C1;
+        }
 
-.requirements label,
-.ferpa-requirements label {
-    display: flex;
-    align-items: flex-start;
-    padding: 0.8rem;
-    background: #FAFAFA;
-    border-radius: 4px;
-    margin-bottom: 0.6rem;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: 1px solid var(--border-color);
-}
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 1.5px solid var(--text-color-secondary);
+            border-radius: var(--border-radius-sm); /* Rounded square */
+            margin-right: 0.9rem;
+            margin-top: 0.1rem; /* Adjust vertical alignment */
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            background-color: var(--surface-color);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
 
-.requirements label:hover,
-.ferpa-requirements label:hover {
-    background: white;
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-sm);
-}
+        input[type="checkbox"]:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
 
-input[type="checkbox"] {
-    margin: 0.2rem 0.8rem 0 0;
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 3px;
-    cursor: pointer;
-    accent-color: var(--primary-color);
-    appearance: none;
-    -webkit-appearance: none;
-    border: 2px solid var(--primary-color);
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    flex-shrink: 0;
-}
+        input[type="checkbox"]:checked::after {
+            content: '\f00c'; /* Font Awesome checkmark */
+            font-family: 'Font Awesome 6 Free'; /* Ensure Font Awesome is loaded */
+            font-weight: 900; /* Solid check */
+            color: white;
+            font-size: 0.8rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+        }
 
-.requirements label {
-    display: none;
-}
+        /* Hide original requirement labels, they are shown via JS */
+        .requirements label {
+            display: none;
+        }
+        .ferpa-requirements label,
+        .consent-label {
+            display: flex;
+        }
 
-.ferpa-requirements label {
-    display: flex;
-}
 
-input[type="checkbox"]:checked {
-    background-color: var(--primary-color);
-}
+        .signature-container,
+        .signature-container-parent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.8rem 0;
+        }
 
-input[type="checkbox"]:checked:after {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
+        #signature-pad,
+        #signature-pad-parent {
+            border: 1px solid var(--border-color-light);
+            border-radius: var(--border-radius-md);
+            background: white;
+            width: 100%;
+            max-width: 450px; /* Slightly wider */
+            height: 200px;
+            cursor: crosshair;
+            box-shadow: var(--shadow-depth-1);
+        }
 
-.signature-container,
-.signature-container-parent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
+        .btn-group {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
 
-#signature-pad,
-#signature-pad-parent {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background: white;
-    width: 100%;
-    max-width: 400px;
-    height: 200px;
-    cursor: crosshair;
-    box-shadow: var(--shadow-sm);
-}
+        button, .submit-btn {
+            padding: 0.75rem 1.6rem; /* Adjusted padding */
+            border: 1px solid transparent;
+            border-radius: var(--border-radius-md);
+            font-weight: 500; /* Medium */
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--font-family); /* Ensure font */
+        }
 
-.btn-group {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 0.8rem;
-}
+        button.secondary {
+            background: #E1E1E1; /* Light gray */
+            color: var(--text-color-primary);
+            border-color: #C1C1C1; /* Subtle border */
+        }
 
-button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-}
+        button.secondary:hover {
+            background: #D1D1D1;
+            border-color: #B1B1B1;
+        }
 
-button.secondary {
-    background: #F3F2F1;
-    color: var(--text-color);
-}
+        .submit-btn {
+            background: var(--accent-color);
+            color: white;
+            width: 100%;
+            padding: 0.9rem; /* Slightly larger padding */
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            letter-spacing: 0.3px;
+            border: none;
+            box-shadow: var(--shadow-depth-1);
+        }
 
-button.secondary:hover {
-    background: #E1DFDD;
-}
+        .submit-btn:hover {
+            background: var(--accent-color-hover);
+            box-shadow: var(--shadow-depth-2);
+        }
 
-.submit-btn {
-    background: var(--primary-color);
-    color: white;
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-    letter-spacing: 0.3px;
-}
+        .guardian-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, margin 0.4s ease-in-out;
+            padding: 0 2rem; /* Match section padding */
+            margin: 0;
+            border-bottom: none; /* Avoid double border */
+        }
 
-.submit-btn:hover {
-    background: var(--secondary-color);
-    box-shadow: var(--shadow-md);
-}
+        .guardian-section.visible {
+            max-height: 2000px; /* Large enough value */
+            padding: 1.5rem 2rem; /* Restore padding */
+            margin: 0; /* Restore margin if needed */
+            border-bottom: 1px solid var(--border-color-light);
+        }
 
-.guardian-section {
-    display: none;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-}
 
-.guardian-section.visible {
-    display: block;
-    max-height: 2000px;
-}
+        .section-note {
+            color: var(--text-color-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: normal; /* Remove italic unless specifically desired */
+            background-color: #F0F8FF; /* AliceBlue - subtle highlight */
+            padding: 0.7rem 1rem;
+            border-radius: var(--border-radius-md);
+            border-left: 3px solid var(--accent-color-light);
+        }
 
-.section-note {
-    color: #605E5C;
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
-    font-style: italic;
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.section {
-    animation: fadeInUp 0.3s ease-out forwards;
-}
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+                padding: 0 0.5rem;
+            }
 
-@media (max-width: 768px) {
-    .container {
-        margin: 0.5rem;
-        padding: 0.5rem;
-    }
+            .form-header {
+                padding: 1.5rem 1rem;
+            }
 
-    .form-header {
-        padding: 1.2rem 1rem;
-    }
+            .form-header h1 {
+                font-size: 1.7rem;
+            }
 
-    .form-header h1 {
-        font-size: 1.5rem;
-    }
+            .section {
+                padding: 1.2rem 1rem;
+            }
 
-    .section {
-        margin: 0.6rem;
-        padding: 1rem;
-    }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
 
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0.8rem;
-    }
+            button, .submit-btn {
+                padding: 0.75rem 1.2rem;
+            }
+        }
 
-    button {
-        padding: 0.7rem 1.2rem;
-    }
-}
+        input:disabled,
+        select:disabled {
+            background-color: #F0F0F0; /* Slightly darker disabled */
+            cursor: not-allowed;
+            opacity: 0.7;
+            border-color: #D1D1D1;
+        }
 
-input:disabled,
-select:disabled {
-    background-color: #F3F2F1;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
 
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
+        /* Tooltip Style (Optional - if using data-tooltip) */
+        [data-tooltip] {
+            position: relative;
+        }
 
-.hidden {
-    display: none;
-}
-
-[data-tooltip] {
-    position: relative;
-}
-
-[data-tooltip]:hover::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.4rem 0.8rem;
-    background: var(--text-color);
-    color: white;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    z-index: 10;
-}
+        [data-tooltip]:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 110%; /* Position above */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 0.8rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 10;
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
@@ -388,34 +397,34 @@ select:disabled {
                 <h1>Admission Application Form</h1>
                 <p>Please complete all required information to process your application</p>
             </div>
-            
+
             <form id="admissionForm" onsubmit="submitForm(event)">
                 <!-- Personal Information Section -->
                 <div class="section">
                     <h2><i class="fas fa-user"></i> PERSONAL INFORMATION</h2>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Last Name:</label>
-                            <input type="text" name="lastName" required placeholder="Enter your last name">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
                         </div>
                         <div class="form-group">
-                            <label>First Name:</label>
-                            <input type="text" name="firstName" required placeholder="Enter your first name">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Address:</label>
-                        <input type="text" name="address" required placeholder="Enter your full address">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" required placeholder="Enter your full address">
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>City:</label>
-                            <input type="text" name="city" required placeholder="Enter your city">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" required placeholder="Enter your city">
                         </div>
                         <div class="form-group">
-                            <label>Country:</label>
+                            <label for="country">Country:</label>
                             <select name="country" id="country" required onchange="toggleStateField()">
                              <option value="">Select Country</option>
                                 <option value="United States">United States</option>
@@ -432,39 +441,39 @@ select:disabled {
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Zip Code:</label>
-                            <input type="text" name="zipCode" required placeholder="Enter zip code">
+                            <label for="zipCode">Zip Code:</label>
+                            <input type="text" id="zipCode" name="zipCode" required placeholder="Enter zip code">
                         </div>
 
                         <div class="form-group" id="stateField" style="display: none;">
-                            <label>State (Only USA):</label>
+                            <label for="state">State (Only USA):</label>
                             <input type="text" name="state" id="state" placeholder="If applicable">
                         </div>
 
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Phone/Cell:</label>
-                            <input type="tel" name="phoneCell" required placeholder="Enter your phone number">
+                            <label for="phoneCell">Phone/Cell:</label>
+                            <input type="tel" id="phoneCell" name="phoneCell" required placeholder="Enter your phone number">
                         </div>
                         <div class="form-group">
-                            <label>Government ID #:</label>
-                            <input type="text" name="governmentId" required placeholder="Enter your ID number">
+                            <label for="governmentId">Government ID #:</label>
+                            <input type="text" id="governmentId" name="governmentId" required placeholder="Enter your ID number">
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>E-mail:</label>
-                            <input type="email" name="email" required placeholder="Enter your email">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
                         </div>
                         <div class="form-group">
-                            <label>Gender:</label>
-                            <select name="gender" required>
+                            <label for="gender">Gender:</label>
+                            <select name="gender" id="gender" required>
                                 <option value="">Select Gender</option>
                                 <option value="Female">Female</option>
                                 <option value="Male">Male</option>
@@ -472,21 +481,21 @@ select:disabled {
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Date of Birth:</label>
+                            <label for="dateOfBirth">Date of Birth:</label>
                             <input type="date" name="dateOfBirth" id="dateOfBirth" required onchange="checkAge()">
                         </div>
                         <div class="form-group">
-                            <label>Employer (if applicable):</label>
-                            <input type="text" name="employer" placeholder="If applicable">
+                            <label for="employer">Employer (if applicable):</label>
+                            <input type="text" id="employer" name="employer" placeholder="If applicable">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Occupation:</label>
-                        <input type="text" name="occupation" placeholder="Enter your occupation">
+                        <label for="occupation">Occupation:</label>
+                        <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation">
                     </div>
                 </div>
 
@@ -494,25 +503,25 @@ select:disabled {
                 <div class="section guardian-section" id="guardianSection">
                     <h2><i class="fas fa-users"></i> PARENT OR LEGAL GUARDIAN INFORMATION</h2>
                     <p class="section-note">Required for applicants under 18 years of age</p>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Last Name:</label>
+                            <label for="parentLastName">Last Name:</label>
                             <input type="text" name="parentLastName" id="parentLastName" placeholder="Enter guardian's last name">
                         </div>
                         <div class="form-group">
-                            <label>First Name:</label>
+                            <label for="parentFirstName">First Name:</label>
                             <input type="text" name="parentFirstName" id="parentFirstName" placeholder="Enter guardian's first name">
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>E-mail:</label>
+                            <label for="parentEmail">E-mail:</label>
                             <input type="email" name="parentEmail" id="parentEmail" placeholder="Enter guardian's email">
                         </div>
                         <div class="form-group">
-                            <label>Relationship:</label>
+                            <label for="relationship">Relationship:</label>
                             <input type="text" name="relationship" id="relationship" placeholder="Enter relationship to applicant">
                         </div>
                     </div>
@@ -521,19 +530,19 @@ select:disabled {
                         <label>Signature of the Parent:</label>
                         <canvas id="signature-pad-parent" width="400" height="200"></canvas>
                         <div class="btn-group">
-                            <button type="button" class="secondary" onclick="clearSignatureParent()">Clear Signature</button>
+                            <button type="button" class="secondary" onclick="clearSignatureParent()"><i class="fas fa-eraser"></i> Clear Signature</button>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
                 <!-- Admission Information Section -->
                 <div class="section">
                     <h2><i class="fas fa-graduation-cap"></i> ADMISSION INFORMATION</h2>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Select the program level:</label>
+                            <label for="programLevel">Select the program level:</label>
                             <select name="programLevel" id="programLevel" required onchange="updatePrograms()">
                                 <option value="">Select Level</option>
                                 <option value="Graduate +">Graduate +</option>
@@ -542,25 +551,25 @@ select:disabled {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Select the Program:</label>
+                            <label for="program">Select the Program:</label>
                             <select name="program" id="program" required>
                                 <option value="">Select Program</option>
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Select the language of the program:</label>
-                            <select name="programLanguage" required>
+                            <label for="programLanguage">Select the language of the program:</label>
+                            <select name="programLanguage" id="programLanguage" required>
                                 <option value="">Select Language</option>
                                 <option value="English">English</option>
                                 <option value="Spanish">Spanish</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Select the program delivery:</label>
-                            <select name="programDelivery" required>
+                            <label for="programDelivery">Select the program delivery:</label>
+                            <select name="programDelivery" id="programDelivery" required>
                                 <option value="">Select Delivery</option>
                                 <option value="Online">Online</option>
                                 <option value="Hybrid">Hybrid</option>
@@ -568,7 +577,7 @@ select:disabled {
                         </div>
 
                         <div class="form-group">
-                            <label>Select the semester:</label>
+                            <label for="semester">Select the semester:</label>
                             <select name="semester" id="semester" required>
                                 <option value="">Select Semester</option>
                             </select>
@@ -576,12 +585,12 @@ select:disabled {
 
                     </div>
                 </div>
-                
+
                 <!-- Requirements Section -->
                 <div class="section">
-                    <h2><i class="fas fa-clipboard-check"></i> CHECK THE REQUIREMENTS FOR ADMISSION THAT YOU ARE SUBMITTING</h2>
-                    <p class="section-note">Please confirm all documents you are submitting with your application</p>
-                    
+                    <h2><i class="fas fa-clipboard-check"></i> ADMISSION REQUIREMENTS</h2>
+                    <p class="section-note">Check all documents you are submitting with this application.</p>
+
                     <div class="requirements">
                         <label id="req1">
                             <input type="checkbox" name="requirementPhotoId">
@@ -590,7 +599,7 @@ select:disabled {
                                 <p>Official valid government issued photo identification</p>
                             </div>
                         </label>
-                        
+
                         <label id="req2">
                             <input type="checkbox" name="requirementHighSchool">
                             <div>
@@ -598,7 +607,7 @@ select:disabled {
                                 <p>Official high school diploma or equivalent from an accredited, state licensed, or government recognized institution</p>
                             </div>
                         </label>
-                        
+
                         <label id="req3">
                             <input type="checkbox" name="requirementTranscript">
                             <div>
@@ -606,7 +615,7 @@ select:disabled {
                                 <p>If applying with an Associate Degree: an Official transcript from an Accredited or licensed institution</p>
                             </div>
                         </label>
-                        
+
                         <label id="req4">
                             <input type="checkbox" name="requirementAssociateDegree">
                             <div>
@@ -614,7 +623,7 @@ select:disabled {
                                 <p>If applying with an Associate Degree: a Copy of their Associate's Degree Diploma from an Accredited or Licensed institution</p>
                             </div>
                         </label>
-                        
+
                         <label id="req5">
                             <input type="checkbox" name="requirementForeignTranslation">
                             <div>
@@ -622,7 +631,7 @@ select:disabled {
                                 <p>If applying with an Associate Degree: a Certified translation for any foreign degree or transcript and must be equivalent to a U.S. Associate Degree</p>
                             </div>
                         </label>
-                        
+
                         <label id="req6">
                             <input type="checkbox" name="requirementBachelorTranscript">
                             <div>
@@ -630,7 +639,7 @@ select:disabled {
                                 <p>Official transcript or original foreign evaluation showing successful completion of a US equivalent bachelor's degree with a minimum cumulative grade point average of 2.0 from an accredited college or university or equivalent recognition</p>
                             </div>
                         </label>
-                        
+
                         <label id="req7">
                             <input type="checkbox" name="requirementBachelorDiploma">
                             <div>
@@ -638,7 +647,7 @@ select:disabled {
                                 <p>Copy of the Bachelor's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition</p>
                             </div>
                         </label>
-                    
+
                         <label id="req8">
                             <input type="checkbox" name="requirementMasterDiploma">
                             <div>
@@ -646,7 +655,7 @@ select:disabled {
                                 <p>Copy of the Master's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition.</p>
                             </div>
                         </label>
-                        
+
                         <label id="req9">
                             <input type="checkbox" name="requirementMasterTranscript">
                             <div>
@@ -654,7 +663,7 @@ select:disabled {
                                 <p>Official transcript of the Master's Degree Diploma equivalent in the U.S. from an Accredited University, or its equivalent recognition.</p>
                             </div>
                         </label>
-                        
+
                         <label id="req10">
                             <input type="checkbox" name="requirementBusinessExperience">
                             <div>
@@ -662,7 +671,7 @@ select:disabled {
                                 <p>Documentation that certifies 4 years of verifiable business experience</p>
                             </div>
                         </label>
-                        
+
                         <label id="req11">
                             <input type="checkbox" name="requirementLanguageCompetency">
                             <div>
@@ -676,10 +685,10 @@ select:disabled {
                 <!-- SCHOLARSHIP INFORMATION -->
                 <div class="section">
                     <h2><i class="fas fa-award"></i> SCHOLARSHIP INFORMATION</h2>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Scholarship Type:</label>
+                            <label for="scholarshipType">Scholarship Type:</label>
                             <select name="scholarshipType" id="scholarshipType" required  onchange="toggleFamilyIncome()">
                                 <option value="">Select Scholarship</option>
                                 <option value="Elizabeth Blackwell Grant">Elizabeth Blackwell Grant</option>
@@ -687,9 +696,9 @@ select:disabled {
                                 <option value="Celia Cruz Scholarship">Celia Cruz Scholarship</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group" id="familyIncomeField" style="display: none;">
-                            <label>Family Income:<span class="required">*</span></label>
+                            <label for="familyIncome">Family Income:</label>
                             <select name="familyIncome" id="familyIncome">
                                 <option value="">Select Income Range</option>
                                 <option value="Annual gross income less than $ 20,000.00 in the year prior to the application">Annual gross income less than $ 20,000.00 in the year prior to the application</option>
@@ -700,128 +709,123 @@ select:disabled {
                     </div>
                 </div>
 
-<!-- FERPA Waiver Section -->
-<div class="section">
-    <h2><i class="fas fa-user-shield"></i> FERPA WAIVER FORM</h2>
-    <p class="section-note">This form is to be used by the student to grant access to their records to other persons or entities, such as a parent, spouse, or employer. When completing this form, please print all items clearly to allow for correct processing.</p>
+                <!-- FERPA Waiver Section -->
+                <div class="section">
+                    <h2><i class="fas fa-user-shield"></i> FERPA WAIVER FORM</h2>
+                    <p class="section-note">This form allows you to grant access to your educational records to other persons or entities. Please print clearly.</p>
 
-    <!-- Initial Consent -->
-    <div class="form-group">
-        <label class="consent-label">
-            <input type="checkbox" name="ferpaConsent" id="ferpaConsent" onchange="toggleFerpaContent(this.checked)">
-            <span>I hereby authorize Blackwell Global University to release my educational records to the persons listed below. I understand this authorization will remain in effect until I submit a written request to cancel it.</span>
-        </label>
-    </div>
+                    <!-- Initial Consent -->
+                    <div class="form-group consent-label">
+                        <input type="checkbox" name="ferpaConsent" id="ferpaConsent" onchange="toggleFerpaContent(this.checked)">
+                        <span>I hereby authorize Blackwell Global University to release my educational records to the persons listed below. I understand this authorization will remain in effect until I submit a written request to cancel it.</span>
+                    </div>
 
-    <!-- FERPA Content (hidden by default) -->
-    <div id="ferpaContent" style="display: none;">
-        <!-- Authorized Persons -->
-        <div class="form-row">
-            <div class="form-group">
-                <label>Authorized person's full name:</label>
-                <input type="text" name="ferpaAuthorizedPerson1" placeholder="Enter full name">
-            </div>
-            <div class="form-group">
-                <label>Relationship:</label>
-                <input type="text" name="ferpaRelationship1" placeholder="Enter relationship">
-            </div>
-        </div>
+                    <!-- FERPA Content (hidden by default) -->
+                    <div id="ferpaContent" style="display: none; margin-top: 1.5rem; border-top: 1px dashed var(--border-color-light); padding-top: 1.5rem;">
+                        <h4>Authorized Persons</h4>
+                        <div class="form-row" style="margin-top: 0.5rem;">
+                            <div class="form-group">
+                                <label for="ferpaAuthorizedPerson1">Authorized person's full name:</label>
+                                <input type="text" id="ferpaAuthorizedPerson1" name="ferpaAuthorizedPerson1" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="ferpaRelationship1">Relationship:</label>
+                                <input type="text" id="ferpaRelationship1" name="ferpaRelationship1" placeholder="e.g., Parent, Spouse">
+                            </div>
+                        </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label>Authorized person's full name:</label>
-                <input type="text" name="ferpaAuthorizedPerson2" placeholder="Enter full name">
-            </div>
-            <div class="form-group">
-                <label>Relationship:</label>
-                <input type="text" name="ferpaRelationship2" placeholder="Enter relationship">
-            </div>
-        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ferpaAuthorizedPerson2">Authorized person's full name:</label>
+                                <input type="text" id="ferpaAuthorizedPerson2" name="ferpaAuthorizedPerson2" placeholder="Enter full name (optional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="ferpaRelationship2">Relationship:</label>
+                                <input type="text" id="ferpaRelationship2" name="ferpaRelationship2" placeholder="e.g., Employer (optional)">
+                            </div>
+                        </div>
 
-        <!-- Types of Information -->
-        <div class="requirements ferpa-requirements">
-            <label>
-                <input type="checkbox" name="ferpaAllRecords" onchange="toggleAllFerpaRecords(this.checked)">
-                <div>
-                    <strong>All Records</strong>
-                    <p>Release all educational records</p>
+                        <h4 style="margin-top: 1rem;">Types of Information to Release</h4>
+                        <div class="ferpa-requirements" style="margin-top: 0.5rem;">
+                            <label>
+                                <input type="checkbox" name="ferpaAllRecords" onchange="toggleAllFerpaRecords(this.checked)">
+                                <div>
+                                    <strong>All Records</strong>
+                                    <p>Release all educational records</p>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="ferpaAccounting" class="ferpa-specific">
+                                <div>
+                                    <strong>Accounting</strong>
+                                    <p>Tuition/fees, holds, billing address, payment plans, statements, debt info.</p>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="ferpaAdmission" class="ferpa-specific">
+                                <div>
+                                    <strong>Admission</strong>
+                                    <p>Application dates, program, documents received/pending, admission status/conditions.</p>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="ferpaRegistration" class="ferpa-specific">
+                                <div>
+                                    <strong>Registration</strong>
+                                    <p>Enrollment (current/dates/status), residency, semesters attended, mailing address.</p>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="ferpaAcademicRecords" class="ferpa-specific">
+                                <div>
+                                    <strong>Academic Records</strong>
+                                    <p>Courses, grades, GPA, academic progress, honors, transfer credit, degree(s).</p>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="ferpaFinancialAid" class="ferpa-specific">
+                                <div>
+                                    <strong>Financial Aid</strong>
+                                    <p>All general financial aid information.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </label>
-
-            <label>
-                <input type="checkbox" name="ferpaAccounting" class="ferpa-specific">
-                <div>
-                    <strong>Accounting</strong>
-                    <p>Includes tuition and fee balances, financial holds, mailing and billing address, payment plans, accounting statements and collections and debt information</p>
-                </div>
-            </label>
-
-            <label>
-                <input type="checkbox" name="ferpaAdmission" class="ferpa-specific">
-                <div>
-                    <strong>Admission</strong>
-                    <p>Includes dates of application, programs selected, documents received, documents pending, dates of admission, admission status and conditions of admission</p>
-                </div>
-            </label>
-
-            <label>
-                <input type="checkbox" name="ferpaRegistration" class="ferpa-specific">
-                <div>
-                    <strong>Registration</strong>
-                    <p>Includes current enrollment, dates of enrollment activity, enrollment status, residency status, semesters attended and mailing address information</p>
-                </div>
-            </label>
-
-            <label>
-                <input type="checkbox" name="ferpaAcademicRecords" class="ferpa-specific">
-                <div>
-                    <strong>Academic Records</strong>
-                    <p>Includes courses taken, grades received, GPA, academic progress, honors, transfer credit awarded and degree(s) awarded</p>
-                </div>
-            </label>
-
-            <label>
-                <input type="checkbox" name="ferpaFinancialAid" class="ferpa-specific">
-                <div>
-                    <strong>Financial Aid</strong>
-                    <p>Includes all general financial aid information</p>
-                </div>
-            </label>
-        </div>
-    </div>
-</div>
 
 
-                
-                
                 <!-- Signature Section -->
                 <div class="section">
-                    <h2><i class="fas fa-signature"></i> SIGNATURE</h2>
-                    <p class="section-note">Please sign to confirm all information is accurate</p>
-                    
-                    <div class="form-group">
-                        <label>Date:</label>
-                        <input type="text" id="currentDate" name="date" readonly class="form-control">
-                    </div>
-                    
-                    <div class="signature-container">
-                        <label>Signature of the Applicant:</label>
-                        <canvas id="signature-pad" width="400" height="200"></canvas>
-                        <div class="btn-group">
-                            <button type="button" class="secondary" onclick="clearSignature()">Clear Signature</button>
+                    <h2><i class="fas fa-signature"></i> SIGNATURE & SUBMISSION</h2>
+                    <p class="section-note">Please sign below to certify the accuracy of the information provided.</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                             <label for="currentDate">Date:</label>
+                             <input type="text" id="currentDate" name="date" readonly class="form-control" style="background-color: #f0f0f0;"> <!-- Readonly style -->
                         </div>
                     </div>
 
 
-                    
-                    <div class="form-group" style="margin-top: 20px;">
-                        <label>
-                            <input type="checkbox" name="termsAgreement" required>
-                            I certify that all information provided is true and complete to the best of my knowledge
-                        </label>
+                    <div class="signature-container">
+                        <label>Signature of the Applicant:</label>
+                        <canvas id="signature-pad" width="400" height="200"></canvas>
+                        <div class="btn-group">
+                            <button type="button" class="secondary" onclick="clearSignature()"><i class="fas fa-eraser"></i> Clear Signature</button>
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="submit-btn">Submit Application</button>
+
+                    <div class="form-group consent-label" style="margin-top: 2rem; border-top: 1px dashed var(--border-color-light); padding-top: 1.5rem;">
+                        <input type="checkbox" name="termsAgreement" id="termsAgreement" required>
+                        <span>I certify that all information provided is true and complete to the best of my knowledge.</span>
+                    </div>
+
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Application</button>
                 </div>
             </form>
         </div>
@@ -834,296 +838,335 @@ select:disabled {
 
         async function submitForm(event) {
             event.preventDefault();
-            
+
             if (!validateForm(event)) {
                 return;
             }
-            
-            // Mostrar loading
+
+            // Mostrar loading con estilo actualizado
             Swal.fire({
-                title: 'Enviando formulario...',
-                text: 'Por favor espere',
+                title: 'Submitting Application...',
+                text: 'Please wait while we process your request.',
                 allowOutsideClick: false,
                 showConfirmButton: false,
-                willOpen: () => {
+                color: 'var(--text-color-primary)',
+                background: 'var(--surface-color)',
+                timerProgressBar: true,
+                didOpen: () => {
                     Swal.showLoading();
+                    const popup = Swal.getPopup();
+                    popup.style.borderRadius = 'var(--border-radius-lg)';
+                    popup.style.fontFamily = 'var(--font-family)';
                 }
             });
-            
+
             const formData = {};
             const form = document.getElementById('admissionForm');
-            
+
             // Recoger todos los datos del formulario
             new FormData(form).forEach((value, key) => {
-                if (key.startsWith('requirement')) {
-                    formData[key] = value === 'on';
+                // Handle checkboxes correctly (value 'on' if checked, else not included)
+                 if (form.elements[key]?.type === 'checkbox') {
+                    formData[key] = form.elements[key].checked;
                 } else {
                     formData[key] = value;
                 }
             });
-            
-// Añadir ambas firmas
-const canvas = document.getElementById('signature-pad');
-const canvasParent = document.getElementById('signature-pad-parent');
-formData.signature = canvas.toDataURL();
-formData.signatureParent = canvasParent.toDataURL();
+
+            // Añadir ambas firmas
+            const canvas = document.getElementById('signature-pad');
+            const canvasParent = document.getElementById('signature-pad-parent');
+
+            // Check if canvas has content before converting (avoid blank images)
+            const isApplicantSigned = !isCanvasBlank(canvas);
+            const isParentSigned = !isCanvasBlank(canvasParent);
+
+            formData.signature = isApplicantSigned ? canvas.toDataURL() : '';
+
+            // Only add parent signature if the section is visible and signed
+            const guardianSection = document.getElementById('guardianSection');
+            if (guardianSection.classList.contains('visible')) {
+                 formData.signatureParent = isParentSigned ? canvasParent.toDataURL() : '';
+            } else {
+                 formData.signatureParent = ''; // Ensure it's blank if not required
+            }
+
 
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: JSON.stringify(formData)
+                    mode: 'cors', // Necessary if GAS is deployed differently
+                    cache: 'no-cache',
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                     headers: {
+                        'Content-Type': 'text/plain;charset=utf-8', // GAS often expects text/plain for POST body stringified
+                    },
+                    body: JSON.stringify(formData) // Send as JSON string
                 });
-                
+
+                // Check if the response is ok (status in the range 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Try parsing the response as JSON
                 const result = await response.json();
-                
+
                 if (result.success) {
+                    // Success popup with styled links
                     Swal.fire({
-                        title: '¡Solicitud Enviada!',
+                        title: 'Application Submitted!',
                         html: `
-    <h2 style="color: #0078D4; font-size: 1.3rem; margin-bottom: 1.2rem; text-align: center; font-family: 'Segoe UI', sans-serif;">Your request has been processed successfully.</h2>
-    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 400px; margin: 0 auto;">
-        ${[
-            { url: result.applicationUrl, text: 'Application Form' },
-            { url: result.acceptanceUrl, text: 'Acceptance Letter' },
-            ...(result.scholarshipUrl ? [{ url: result.scholarshipUrl, text: 'Grant Scholarship Letter' }] : []),
-            { url: result.enrollmentUrl, text: 'Enrollment Agreement' },
-            { url: result.fifthDocumentUrl, text: 'Commitment Letter' },
-            { url: result.grantApplicationUrl, text: 'Grant Application Form' },
-            { url: result.updateFinancialUrl, text: 'Financial Update Letter' },
-            { url: result.ferpaUrl, text: 'FERPA Waiver' }
-        ].map(link => `
-            <a href="${link.url}" target="_blank" 
-               style="background: #0078D4;
-                      color: white !important;
-                      padding: 0.7rem 1rem;
-                      border-radius: 4px;
-                      text-decoration: none;
-                      font-size: 0.95rem;
-                      text-align: center;
-                      font-weight: 500;
-                      transition: all 0.2s ease;
-                      border: none;
-                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                      margin: 3px 0;
-                      font-family: 'Segoe UI', sans-serif;"
-               onmouseover="this.style.background='#106EBE'"
-               onmouseout="this.style.background='#0078D4'">${link.text}</a>
-        `).join('')}
-    </div>
-    <div style="text-align: center; margin-top: 1rem;">
-        <button onclick="location.reload()" 
-                style="background: #F3F2F1;
-                       color: #323130;
-                       padding: 0.7rem 2rem;
-                       border-radius: 4px;
-                       border: none;
-                       font-size: 0.95rem;
-                       font-weight: 500;
-                       cursor: pointer;
-                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                       margin-top: 10px;
-                       font-family: 'Segoe UI', sans-serif;
-                       transition: all 0.2s ease;"
-                onmouseover="this.style.background='#E1DFDD'"
-                onmouseout="this.style.background='#F3F2F1'">Close</button>
-    </div>`,
+                            <h2 style="color: #0078D4; font-size: 1.3rem; margin-bottom: 1.2rem; text-align: center; font-family: var(--font-family);">Your request has been processed successfully.</h2>
+                            <p style="color: var(--text-color-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; text-align: center;">Download your generated documents:</p>
+                            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 450px; margin: 0 auto;">
+                                ${[
+                                    { url: result.applicationUrl, text: 'Application Form' },
+                                    { url: result.acceptanceUrl, text: 'Acceptance Letter' },
+                                    ...(result.scholarshipUrl ? [{ url: result.scholarshipUrl, text: 'Grant Scholarship Letter' }] : []),
+                                    { url: result.enrollmentUrl, text: 'Enrollment Agreement' },
+                                    { url: result.fifthDocumentUrl, text: 'Commitment Letter' },
+                                    { url: result.grantApplicationUrl, text: 'Grant Application Form' },
+                                    { url: result.updateFinancialUrl, text: 'Financial Update Letter' },
+                                    { url: result.ferpaUrl, text: 'FERPA Waiver' }
+                                ].map(link => `
+                                    <a href="${link.url}" target="_blank"
+                                       style="background: var(--accent-color);
+                                              color: white !important;
+                                              padding: 0.8rem 1.2rem;
+                                              border-radius: var(--border-radius-md);
+                                              text-decoration: none;
+                                              font-size: 0.95rem;
+                                              text-align: center;
+                                              font-weight: 500;
+                                              transition: background-color 0.2s ease;
+                                              border: none;
+                                              display: block; /* Ensure full width */
+                                              font-family: var(--font-family);"
+                                       onmouseover="this.style.background='var(--accent-color-hover)'"
+                                       onmouseout="this.style.background='var(--accent-color)'">
+                                       <i class="fas fa-download" style="margin-right: 8px;"></i>${link.text}
+                                    </a>
+                                `).join('')}
+                            </div>
+                            <div style="text-align: center; margin-top: 1.8rem;">
+                                <button onclick="location.reload()"
+                                        style="background: #E1E1E1;
+                                               color: var(--text-color-primary);
+                                               padding: 0.7rem 2rem;
+                                               border-radius: var(--border-radius-md);
+                                               border: 1px solid #C1C1C1;
+                                               font-size: 0.95rem;
+                                               font-weight: 500;
+                                               cursor: pointer;
+                                               margin-top: 10px;
+                                               font-family: var(--font-family);
+                                               transition: background-color 0.2s ease;"
+                                        onmouseover="this.style.background='#D1D1D1'"
+                                        onmouseout="this.style.background='#E1E1E1'">Close</button>
+                            </div>`,
                         icon: 'success',
                         showConfirmButton: false,
-                        showCloseButton: true
+                        showCloseButton: true,
+                        customClass: {
+                             popup: 'win11-swal-popup',
+                             title: 'win11-swal-title',
+                             htmlContainer: 'win11-swal-html'
+                        }
                     });
-                    
-                    // Opcional: limpiar el formulario
+
+                    // Optional: clear form
                     form.reset();
                     clearSignature();
+                    clearSignatureParent();
+                    // Hide sections that might have been shown
+                     document.getElementById('guardianSection').classList.remove('visible');
+                     document.getElementById('stateField').style.display = 'none';
+                     document.getElementById('familyIncomeField').style.display = 'none';
+                     toggleFerpaContent(false); // Hide FERPA details
+                     updatePrograms(); // Reset programs and requirements
+                     setDate(); // Reset date
                 } else {
-                    Swal.fire({
-                        title: 'Error',
-                        text: result.error || 'Hubo un error al procesar tu solicitud',
-                        icon: 'error'
+                    // Handle application-level errors from GAS
+                     Swal.fire({
+                        title: 'Submission Error',
+                        text: result.error || 'An unknown error occurred while processing your application.',
+                        icon: 'error',
+                        color: 'var(--text-color-primary)',
+                        background: 'var(--surface-color)',
+                        confirmButtonColor: 'var(--accent-color)',
+                        customClass: { popup: 'win11-swal-popup' }
                     });
                 }
             } catch (error) {
+                 // Handle network errors or JSON parsing errors
+                console.error('Submission Error:', error);
                 Swal.fire({
-                    title: 'Error',
-                    text: 'Error al enviar el formulario: ' + error.message,
-                    icon: 'error'
+                    title: 'Network or Server Error',
+                    text: `Could not submit the form. Please check your connection or try again later. Error: ${error.message}`,
+                    icon: 'error',
+                    color: 'var(--text-color-primary)',
+                    background: 'var(--surface-color)',
+                    confirmButtonColor: 'var(--accent-color)',
+                    customClass: { popup: 'win11-swal-popup' }
                 });
             }
         }
 
-        // Set current date in text format
+         // Helper to set current date
+         function setDate() {
+             const today = new Date();
+             const options = {
+                 year: 'numeric',
+                 month: 'long',
+                 day: 'numeric'
+             };
+             document.getElementById('currentDate').value = today.toLocaleDateString('en-US', options);
+         }
+
+        // Set current date on load
         window.onload = function() {
-            const today = new Date();
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            document.getElementById('currentDate').value = today.toLocaleDateString('en-US', options);
+            setDate();
+            // Initialize signature pads
+            initializeSignaturePad(canvas, ctx);
+            initializeSignaturePad(canvasParent, ctxParent);
+            // Initial check in case DOB is pre-filled or restored by browser
+            checkAge();
+            updatePrograms(); // Set initial requirements visibility
         }
 
         // Check age and show/hide guardian section
         function checkAge() {
-    const dob = new Date(document.getElementById('dateOfBirth').value);
-    const today = new Date();
-    let age = today.getFullYear() - dob.getFullYear();
-    const monthDiff = today.getMonth() - dob.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-        age--;
-    }
+            const dobInput = document.getElementById('dateOfBirth');
+            const guardianSection = document.getElementById('guardianSection');
+            const guardianFields = ['parentLastName', 'parentFirstName', 'parentEmail', 'relationship'];
+            const canvasParentContainer = document.querySelector('.signature-container-parent');
 
-    const guardianSection = document.getElementById('guardianSection');
-    const guardianFields = ['parentLastName', 'parentFirstName', 'parentEmail', 'relationship'];
-    
-    if (age < 18) {
-        guardianSection.classList.add('visible');
-        guardianFields.forEach(field => {
-            document.getElementById(field).required = true;
-        });
-        
-        // Reinicializar el canvas del guardián
-        const canvasParent = document.getElementById('signature-pad-parent');
-        const ctxParent = canvasParent.getContext('2d');
-        canvasParent.width = canvasParent.offsetWidth;
-        canvasParent.height = 200; // Forzar altura
-        ctxParent.lineWidth = 2;
-        ctxParent.strokeStyle = '#000000';
-    } else {
-        guardianSection.classList.remove('visible');
-        guardianFields.forEach(field => {
-            document.getElementById(field).required = false;
-        });
-    }
-}
+            if (!dobInput.value) {
+                 guardianSection.classList.remove('visible');
+                 guardianFields.forEach(fieldId => {
+                     const field = document.getElementById(fieldId);
+                     if (field) field.required = false;
+                 });
+                 return;
+            }
 
-        // Update programs based on program level
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+
+            if (age < 18) {
+                guardianSection.classList.add('visible');
+                guardianFields.forEach(fieldId => {
+                     const field = document.getElementById(fieldId);
+                     if (field) field.required = true;
+                 });
+                 // Ensure parent signature pad is visible and initialized only when needed
+                 if (canvasParentContainer) canvasParentContainer.style.display = 'flex';
+                 // Re-initialize parent pad dimensions might be needed if display changed
+                 resizeCanvas(canvasParent);
+
+            } else {
+                guardianSection.classList.remove('visible');
+                guardianFields.forEach(fieldId => {
+                     const field = document.getElementById(fieldId);
+                     if (field) {
+                         field.required = false;
+                         field.value = ''; // Clear fields when hiding
+                     }
+                 });
+                 if (canvasParentContainer) canvasParentContainer.style.display = 'none';
+                 clearSignatureParent(); // Clear signature when hiding
+            }
+        }
+
+        // Update programs based on program level and show/hide requirements
         function updatePrograms() {
-    const programLevel = document.getElementById('programLevel').value;
-    const programSelect = document.getElementById('program');
-    const semesterSelect = document.getElementById('semester');
-    
-    // Limpiar opciones actuales
-    programSelect.innerHTML = '<option value="">Select Program</option>';
-    semesterSelect.innerHTML = '<option value="">Select Semester</option>';
-    
-    // Ocultar todos los requisitos primero
-    for(let i = 1; i <= 11; i++) {
-        document.getElementById(`req${i}`).style.display = 'none';
-    }
-    
-    if (programLevel === 'Graduate +') {
-        // Mostrar requisitos específicos para Graduate +
-        const showReqs = [1, 8, 9, 10, 11];
-        showReqs.forEach(num => {
-            document.getElementById(`req${num}`).style.display = 'flex';
-        });
-        
-        // Actualizar programas Graduate +
-        const programs = [
-            'Doctorate in Business Administration'
-        ];
-        programs.forEach(program => {
-            const option = document.createElement('option');
-            option.value = program;
-            option.textContent = program;
-            programSelect.appendChild(option);
-        });
+            const programLevel = document.getElementById('programLevel').value;
+            const programSelect = document.getElementById('program');
+            const semesterSelect = document.getElementById('semester');
+            const requirementsContainer = document.querySelector('.requirements');
 
-        // Actualizar semestres Graduate +
-        const semesters = [
-            'April 28, 2025',
-            'June 23, 2025'
+            // Clear current options
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+            semesterSelect.innerHTML = '<option value="">Select Semester</option>';
 
-        ];
-        semesters.forEach(semester => {
-            const option = document.createElement('option');
-            option.value = semester;
-            option.textContent = semester;
-            semesterSelect.appendChild(option);
-        });
-    } 
-    else if (programLevel === 'Graduate') {
-        // Mostrar requisitos específicos para Graduate
-        const showReqs = [1, 6, 7, 11];
-        showReqs.forEach(num => {
-            document.getElementById(`req${num}`).style.display = 'flex';
-        });
-        
-        // Actualizar programas Graduate
-        const programs = [
-            'Master of Business Administration',
-            'Master of Science in Hospitality Management',
-            'Master of Science in Healthcare Management',
-            'Master of Science in Project Management',
-            'Master of Science in Artificial Intelligence',
-            'Master of Science in Cybersecurity',
-            'Master of Science in Renewable Energy and Sustainability Systems',
-            'Master of Science in Criminal Justice'
-        ];
-        programs.forEach(program => {
-            const option = document.createElement('option');
-            option.value = program;
-            option.textContent = program;
-            programSelect.appendChild(option);
-        });
+            // Hide all requirement labels first
+            requirementsContainer.querySelectorAll('label[id^="req"]').forEach(label => {
+                 label.style.display = 'none';
+                 const checkbox = label.querySelector('input[type="checkbox"]');
+                 if (checkbox) checkbox.checked = false; // Uncheck hidden requirements
+            });
 
-        // Actualizar semestres Graduate
-        const semesters = [
-        'April 28, 2025',
-            'May 26, 2025',
-            'June 23, 2025' ,
-            'July 21, 2025'
-        ];
-        semesters.forEach(semester => {
-            const option = document.createElement('option');
-            option.value = semester;
-            option.textContent = semester;
-            semesterSelect.appendChild(option);
-        });
-    } 
-    else if (programLevel === 'Undergraduate') {
-        // Mostrar requisitos específicos para Undergraduate
-        const showReqs = [1, 2, 3, 4, 5, 11];
-        showReqs.forEach(num => {
-            document.getElementById(`req${num}`).style.display = 'flex';
-        });
-        
-        // Actualizar programas Undergraduate
-        const programs = [
-            'Bachelor of Arts in Accounting',
-            'Bachelor of Science in Business Administration',
-            'Upgrade of Arts in Accounting',
-            'Upgrade of Science in Business Administration'
-        ];
-        programs.forEach(program => {
-            const option = document.createElement('option');
-            option.value = program;
-            option.textContent = program;
-            programSelect.appendChild(option);
-        });
+            let programs = [];
+            let semesters = [];
+            let showReqs = []; // IDs of requirements to show (numbers)
 
-        // Actualizar semestres Undergraduate
-        const semesters = [
-        'April 21, 2025',
-            'May 26, 2025',
-            'June 30, 2025'
-        ];
-        semesters.forEach(semester => {
-            const option = document.createElement('option');
-            option.value = semester;
-            option.textContent = semester;
-            semesterSelect.appendChild(option);
-        });
-    }
-}
+             if (programLevel === 'Graduate +') {
+                 showReqs = [1, 8, 9, 10, 11];
+                 programs = ['Doctorate in Business Administration'];
+                 semesters = ['April 28, 2025', 'June 23, 2025'];
+             } else if (programLevel === 'Graduate') {
+                 showReqs = [1, 6, 7, 11];
+                 programs = [
+                     'Master of Business Administration',
+                     'Master of Science in Hospitality Management',
+                     'Master of Science in Healthcare Management',
+                     'Master of Science in Project Management',
+                     'Master of Science in Artificial Intelligence',
+                     'Master of Science in Cybersecurity',
+                     'Master of Science in Renewable Energy and Sustainability Systems',
+                     'Master of Science in Criminal Justice'
+                 ];
+                 semesters = ['April 28, 2025', 'May 26, 2025', 'June 23, 2025', 'July 21, 2025'];
+             } else if (programLevel === 'Undergraduate') {
+                 showReqs = [1, 2, 3, 4, 5, 11];
+                 programs = [
+                     'Bachelor of Arts in Accounting',
+                     'Bachelor of Science in Business Administration',
+                     'Upgrade of Arts in Accounting',
+                     'Upgrade of Science in Business Administration'
+                 ];
+                 semesters = ['April 21, 2025', 'May 26, 2025', 'June 30, 2025'];
+            }
 
-        // Función para mostrar/ocultar campo de estado
+             // Populate Program dropdown
+             programs.forEach(program => {
+                 const option = document.createElement('option');
+                 option.value = program;
+                 option.textContent = program;
+                 programSelect.appendChild(option);
+             });
+
+             // Populate Semester dropdown
+             semesters.forEach(semester => {
+                 const option = document.createElement('option');
+                 option.value = semester;
+                 option.textContent = semester;
+                 semesterSelect.appendChild(option);
+             });
+
+             // Show relevant requirements
+             showReqs.forEach(num => {
+                 const reqLabel = document.getElementById(`req${num}`);
+                 if (reqLabel) {
+                     reqLabel.style.display = 'flex';
+                 }
+             });
+        }
+
+        // Toggle state field based on country
         function toggleStateField() {
             const country = document.getElementById('country').value;
             const stateField = document.getElementById('stateField');
             const stateInput = document.getElementById('state');
-            
+
             if (country === 'United States') {
                 stateField.style.display = 'block';
                 stateInput.required = true;
@@ -1134,12 +1177,12 @@ formData.signatureParent = canvasParent.toDataURL();
             }
         }
 
-        // Función para mostrar/ocultar campo de ingreso familiar
+        // Toggle family income field based on scholarship
         function toggleFamilyIncome() {
             const scholarshipType = document.getElementById('scholarshipType').value;
             const familyIncomeField = document.getElementById('familyIncomeField');
             const familyIncomeSelect = document.getElementById('familyIncome');
-            
+
             if (scholarshipType === 'Elizabeth Blackwell Grant') {
                 familyIncomeField.style.display = 'block';
                 familyIncomeSelect.required = true;
@@ -1150,194 +1193,311 @@ formData.signatureParent = canvasParent.toDataURL();
             }
         }
 
-        // Signature pad initialization
+        // --- Signature Pad Logic ---
         const canvas = document.getElementById('signature-pad');
         const ctx = canvas.getContext('2d');
+        const canvasParent = document.getElementById('signature-pad-parent');
+        const ctxParent = canvasParent.getContext('2d');
+
         let isDrawing = false;
-        
-        // Set up the canvas
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#000000';
-        
-        // Event listeners for drawing
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
-        
-        // Touch support for mobile
-        canvas.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            startDrawing(e.touches[0]);
-        });
-        canvas.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            draw(e.touches[0]);
-        });
-        canvas.addEventListener('touchend', stopDrawing);
-        
-        function startDrawing(e) {
-            isDrawing = true;
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        let lastX = 0;
+        let lastY = 0;
+
+        let isDrawingParent = false;
+        let lastXParent = 0;
+        let lastYParent = 0;
+
+        function initializeSignaturePad(padCanvas, padCtx) {
+            resizeCanvas(padCanvas); // Set initial size
+            padCtx.strokeStyle = '#333'; // Darker ink
+            padCtx.lineWidth = 2;
+            padCtx.lineJoin = 'round';
+            padCtx.lineCap = 'round';
+
+            // Mouse events
+            padCanvas.addEventListener('mousedown', (e) => startDrawing(e, padCanvas, padCtx));
+            padCanvas.addEventListener('mousemove', (e) => draw(e, padCanvas, padCtx));
+            padCanvas.addEventListener('mouseup', () => stopDrawing(padCanvas));
+            padCanvas.addEventListener('mouseout', () => stopDrawing(padCanvas));
+
+            // Touch events
+            padCanvas.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevent scrolling
+                startDrawing(e.touches[0], padCanvas, padCtx);
+             }, { passive: false });
+             padCanvas.addEventListener('touchmove', (e) => {
+                 e.preventDefault(); // Prevent scrolling
+                 draw(e.touches[0], padCanvas, padCtx);
+             }, { passive: false });
+            padCanvas.addEventListener('touchend', () => stopDrawing(padCanvas));
         }
-        
-        function draw(e) {
-            if (!isDrawing) return;
-            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+
+        function resizeCanvas(padCanvas) {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            padCanvas.width = padCanvas.offsetWidth * ratio;
+            padCanvas.height = padCanvas.offsetHeight * ratio;
+            padCanvas.getContext('2d').scale(ratio, ratio);
+            // Important: Reapply context settings after resize
+            const padCtx = padCanvas.getContext('2d');
+             padCtx.strokeStyle = '#333';
+             padCtx.lineWidth = 2;
+             padCtx.lineJoin = 'round';
+             padCtx.lineCap = 'round';
         }
-        
-        function stopDrawing() {
-            isDrawing = false;
+
+
+        function getCoordinates(e, padCanvas) {
+            const rect = padCanvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
         }
-        
+
+        function startDrawing(e, padCanvas, padCtx) {
+            const coords = getCoordinates(e, padCanvas);
+            if (padCanvas.id === 'signature-pad') {
+                isDrawing = true;
+                [lastX, lastY] = [coords.x, coords.y];
+            } else {
+                isDrawingParent = true;
+                [lastXParent, lastYParent] = [coords.x, coords.y];
+            }
+            padCtx.beginPath(); // Start new path segment
+            padCtx.moveTo(coords.x, coords.y);
+        }
+
+        function draw(e, padCanvas, padCtx) {
+             let currentDrawing = (padCanvas.id === 'signature-pad') ? isDrawing : isDrawingParent;
+             if (!currentDrawing) return;
+
+             const coords = getCoordinates(e, padCanvas);
+             let currentLastX = (padCanvas.id === 'signature-pad') ? lastX : lastXParent;
+             let currentLastY = (padCanvas.id === 'signature-pad') ? lastY : lastYParent;
+
+             padCtx.beginPath(); // Start a new path for each segment for smoother rendering
+             padCtx.moveTo(currentLastX, currentLastY);
+             padCtx.lineTo(coords.x, coords.y);
+             padCtx.stroke();
+
+            if (padCanvas.id === 'signature-pad') {
+                [lastX, lastY] = [coords.x, coords.y];
+            } else {
+                [lastXParent, lastYParent] = [coords.x, coords.y];
+            }
+        }
+
+        function stopDrawing(padCanvas) {
+            if (padCanvas.id === 'signature-pad') isDrawing = false;
+            else isDrawingParent = false;
+        }
+
         function clearSignature() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            resizeCanvas(canvas); // Re-apply scaling and settings
         }
 
-// inicio de parent fin
+        function clearSignatureParent() {
+            ctxParent.clearRect(0, 0, canvasParent.width, canvasParent.height);
+            resizeCanvas(canvasParent); // Re-apply scaling and settings
+        }
 
-// Inicialización del canvas del guardián
-const canvasParent = document.getElementById('signature-pad-parent');
-const ctxParent = canvasParent.getContext('2d');
-let isDrawingParent = false;
-
-// Event listeners para el canvas del guardián
-canvasParent.addEventListener('mousedown', startDrawingParent);
-canvasParent.addEventListener('mousemove', drawParent);
-canvasParent.addEventListener('mouseup', stopDrawingParent);
-canvasParent.addEventListener('mouseout', stopDrawingParent);
-
-// Soporte táctil para el canvas del guardián
-canvasParent.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    startDrawingParent(e.touches[0]);
-});
-canvasParent.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    drawParent(e.touches[0]);
-});
-canvasParent.addEventListener('touchend', stopDrawingParent);
-
-function startDrawingParent(e) {
-    isDrawingParent = true;
-    ctxParent.beginPath();
-    ctxParent.moveTo(
-        e.clientX - canvasParent.getBoundingClientRect().left,
-        e.clientY - canvasParent.getBoundingClientRect().top
-    );
-}
-
-function drawParent(e) {
-    if (!isDrawingParent) return;
-    ctxParent.lineTo(
-        e.clientX - canvasParent.getBoundingClientRect().left,
-        e.clientY - canvasParent.getBoundingClientRect().top
-    );
-    ctxParent.stroke();
-    ctxParent.beginPath();
-    ctxParent.moveTo(
-        e.clientX - canvasParent.getBoundingClientRect().left,
-        e.clientY - canvasParent.getBoundingClientRect().top
-    );
-}
-
-function stopDrawingParent() {
-    isDrawingParent = false;
-}
-
-function clearSignatureParent() {
-    ctxParent.clearRect(0, 0, canvasParent.width, canvasParent.height);
-}
- // firma de parent fin
-        
-        // Form validation
-        function validateForm(event) {
-            // Check if signature exists
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-            const pixelsWithData = Array.from(imageData).some(pixel => pixel !== 0);
-            
-            if (!pixelsWithData) {
-                Swal.fire({
-                    title: 'Firma requerida',
-                    text: 'Por favor firma el formulario antes de enviarlo',
-                    icon: 'error'
-                });
-                return false;
+        // Helper to check if canvas is blank
+        function isCanvasBlank(canvasToCheck) {
+            if (!canvasToCheck || !canvasToCheck.getContext) return true; // Handle case where canvas doesn't exist
+            const context = canvasToCheck.getContext('2d');
+            // Get pixel data, but handle potential SecurityError if canvas is tainted
+            try {
+                const pixelBuffer = new Uint32Array(
+                    context.getImageData(0, 0, canvasToCheck.width, canvasToCheck.height).data.buffer
+                );
+                return !pixelBuffer.some(pixel => pixel !== 0);
+            } catch (e) {
+                 console.warn("Could not check canvas blankness, possibly tainted:", e);
+                 // Assume not blank if we can't check, to avoid blocking submission unnecessarily
+                 return false;
             }
-            
+        }
+
+
+        // --- FERPA Logic ---
+        function toggleFerpaContent(checked) {
+            const ferpaContent = document.getElementById('ferpaContent');
+            const requiredInputs = ferpaContent.querySelectorAll('input[name="ferpaAuthorizedPerson1"], input[name="ferpaRelationship1"]');
+            const checkboxes = ferpaContent.querySelectorAll('.ferpa-requirements input[type="checkbox"]');
+
+            if (checked) {
+                ferpaContent.style.display = 'block';
+                 // Make first authorized person required if consent given
+                 requiredInputs.forEach(input => input.required = true);
+            } else {
+                ferpaContent.style.display = 'none';
+                // Clear and unrequire all FERPA fields when consent is revoked
+                 ferpaContent.querySelectorAll('input[type="text"]').forEach(input => {
+                     input.value = '';
+                     input.required = false;
+                 });
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+            }
+        }
+
+
+        function toggleAllFerpaRecords(checked) {
+            const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
+            specificCheckboxes.forEach(checkbox => {
+                checkbox.checked = checked;
+            });
+        }
+
+        document.querySelectorAll('.ferpa-specific').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const allRecordsCheckbox = document.querySelector('[name="ferpaAllRecords"]');
+                if (!this.checked) {
+                    allRecordsCheckbox.checked = false; // Uncheck "All" if any specific is unchecked
+                } else {
+                    // Check if all specifics are now checked
+                    const allSpecificChecked = Array.from(document.querySelectorAll('.ferpa-specific')).every(cb => cb.checked);
+                    if (allSpecificChecked) {
+                         allRecordsCheckbox.checked = true;
+                    }
+                }
+            });
+        });
+
+        // --- Form Validation ---
+        function validateForm(event) {
+             const applicantSignatureCanvas = document.getElementById('signature-pad');
+             const parentSignatureCanvas = document.getElementById('signature-pad-parent');
+             const guardianSection = document.getElementById('guardianSection');
+             const termsCheckbox = document.getElementById('termsAgreement');
+
+             // 1. Check if Applicant Signature is provided
+             if (isCanvasBlank(applicantSignatureCanvas)) {
+                 Swal.fire({
+                     title: 'Missing Signature',
+                     text: 'Please provide your signature before submitting.',
+                     icon: 'warning',
+                     confirmButtonColor: 'var(--accent-color)',
+                     customClass: { popup: 'win11-swal-popup' }
+                 });
+                 applicantSignatureCanvas.focus(); // Focus the canvas area
+                 applicantSignatureCanvas.style.borderColor = 'red'; // Highlight
+                 setTimeout(() => { applicantSignatureCanvas.style.borderColor = 'var(--border-color-light)'; }, 3000);
+                 return false;
+             }
+
+             // 2. Check if Parent Signature is required and provided
+             if (guardianSection.classList.contains('visible') && isCanvasBlank(parentSignatureCanvas)) {
+                  Swal.fire({
+                     title: 'Missing Parent/Guardian Signature',
+                     text: 'Since the applicant is under 18, the parent or guardian signature is required.',
+                     icon: 'warning',
+                     confirmButtonColor: 'var(--accent-color)',
+                     customClass: { popup: 'win11-swal-popup' }
+                 });
+                 parentSignatureCanvas.focus();
+                 parentSignatureCanvas.style.borderColor = 'red'; // Highlight
+                 setTimeout(() => { parentSignatureCanvas.style.borderColor = 'var(--border-color-light)'; }, 3000);
+                 return false;
+             }
+
+              // 3. Check if Terms Agreement is checked
+             if (!termsCheckbox.checked) {
+                 Swal.fire({
+                     title: 'Agreement Required',
+                     text: 'You must agree to the terms by checking the certification box.',
+                     icon: 'warning',
+                     confirmButtonColor: 'var(--accent-color)',
+                     customClass: { popup: 'win11-swal-popup' }
+                 });
+                 termsCheckbox.focus();
+                 // Optionally highlight the checkbox label
+                 const termsLabel = termsCheckbox.closest('label');
+                 if(termsLabel) {
+                     termsLabel.style.border = '1px solid red';
+                     setTimeout(() => { termsLabel.style.border = '1px solid var(--border-color-light)'; }, 3000);
+                 }
+                 return false;
+             }
+
+
+             // 4. FERPA validation if consent is given
+             const ferpaConsent = document.getElementById('ferpaConsent').checked;
+             if (ferpaConsent) {
+                 const authPerson1 = document.getElementById('ferpaAuthorizedPerson1').value.trim();
+                 const authRel1 = document.getElementById('ferpaRelationship1').value.trim();
+                 const anyRecordSelected = Array.from(document.querySelectorAll('.ferpa-requirements input[type="checkbox"]')).some(cb => cb.checked);
+
+                 if (!authPerson1 || !authRel1) {
+                     Swal.fire({
+                        title: 'Missing FERPA Information',
+                        text: 'Please provide the full name and relationship for at least the first authorized person.',
+                        icon: 'warning',
+                        confirmButtonColor: 'var(--accent-color)',
+                        customClass: { popup: 'win11-swal-popup' }
+                     });
+                     document.getElementById(authPerson1 ? 'ferpaRelationship1' : 'ferpaAuthorizedPerson1').focus();
+                     return false;
+                 }
+                 if (!anyRecordSelected) {
+                     Swal.fire({
+                        title: 'Missing FERPA Selection',
+                        text: 'Please select at least one type of record to release, or select "All Records".',
+                        icon: 'warning',
+                        confirmButtonColor: 'var(--accent-color)',
+                        customClass: { popup: 'win11-swal-popup' }
+                     });
+                     // Focus the first checkbox in the list
+                     document.querySelector('.ferpa-requirements input[type="checkbox"]').focus();
+                     return false;
+                 }
+             }
+
+
+            // If all checks pass
             return true;
         }
 
+        // Add custom styles for Swal popup if needed
+         const styleSheet = document.createElement("style");
+         styleSheet.textContent = `
+             .win11-swal-popup {
+                 font-family: var(--font-family) !important;
+                 border-radius: var(--border-radius-lg) !important;
+                 background-color: var(--surface-color) !important;
+                 color: var(--text-color-primary) !important;
+                 box-shadow: var(--shadow-depth-3) !important;
+             }
+              .win11-swal-title {
+                 color: var(--text-color-primary) !important;
+                 font-weight: 600 !important;
+             }
+              .win11-swal-html {
+                  color: var(--text-color-secondary) !important;
+              }
+              .swal2-close:focus {
+                  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3) !important; /* Focus ring */
+              }
+              .swal2-confirm {
+                  background-color: var(--accent-color) !important;
+                  border-radius: var(--border-radius-md) !important;
+              }
+              .swal2-confirm:hover {
+                   background-color: var(--accent-color-hover) !important;
+              }
+         `;
+         document.head.appendChild(styleSheet);
 
-// Función para mostrar/ocultar el contenido FERPA
-function toggleFerpaContent(checked) {
-    const ferpaContent = document.getElementById('ferpaContent');
-    ferpaContent.style.display = checked ? 'block' : 'none';
-    
-    // Si se desmarca el consentimiento, limpiar todos los campos
-    if (!checked) {
-        clearFerpaFields();
-    }
-}
-
-// Función para limpiar todos los campos FERPA
-function clearFerpaFields() {
-    document.querySelectorAll('[name^="ferpaAuthorizedPerson"], [name^="ferpaRelationship"]')
-        .forEach(input => input.value = '');
-    document.querySelectorAll('.ferpa-requirements input[type="checkbox"]')
-        .forEach(checkbox => checkbox.checked = false);
-}
-
-// Función para cuando se marca/desmarca "All Records"
-function toggleAllFerpaRecords(checked) {
-    const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
-    specificCheckboxes.forEach(checkbox => {
-        checkbox.checked = checked;
-    });
-}
-
-// Función para verificar si todos los específicos están marcados
-function checkAllSpecifics() {
-    const specificCheckboxes = document.querySelectorAll('.ferpa-specific');
-    const allChecked = Array.from(specificCheckboxes).every(checkbox => checkbox.checked);
-    document.querySelector('[name="ferpaAllRecords"]').checked = allChecked;
-}
-
-// Agregar event listeners a los checkboxes específicos
-document.querySelectorAll('.ferpa-specific').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        if (!this.checked) {
-            // Si se desmarca uno, desmarcar "All"
-            document.querySelector('[name="ferpaAllRecords"]').checked = false;
-        } else {
-            // Verificar si todos están marcados
-            checkAllSpecifics();
-        }
-    });
-});
-
-
+          // Resize canvases on window resize
+          window.addEventListener('resize', () => {
+              resizeCanvas(canvas);
+              resizeCanvas(canvasParent);
+              // Redraw content if needed (optional, usually clear is better on resize)
+              // console.log("Resized canvases");
+          });
 
 
     </script>
-    
-    <!-- Waves Animation Background -->
-    <div class="waves-container">
-        <div class="wave wave1"></div>
-        <div class="wave wave2"></div>
-        <div class="wave wave3"></div>
-        <div class="wave wave4"></div>
-    </div>
+
 </body>
 </html>
-
-
-
-
-
